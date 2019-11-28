@@ -7,7 +7,7 @@
 
 
     include_once __DIR__."/TDGAlbum.php";
-
+    date_default_timezone_set("America/New_York");
 
 
     
@@ -46,7 +46,7 @@
         }
 
         public function loadAlbumAvecID($id){
-            $TDG = new TDGAlbum();
+            $TDG = TDGAlbum::getInstance();
             $res = $TDG->getbyId($id);
 
             if(!res){
@@ -74,14 +74,41 @@
          * 
          * IN PROGRESS (faut faire du Css pour donner les bonnes classes n shit )
          */
-
+        
         public function toTable(){
 
         }
 
+        public function créerAlbum($nomUsager,$titre,$description){
+
+            $TDG = TDGAlbum::getInstance();
+
+           if( !$TDG->addAlbum($nomUsager,$titre,$description))
+           {
+            return false;
+           }
+            return true;
+        }
+
+        public function supprimerAlbum($id){
+
+            $TDG = TDGAlbum::getInstance();
+            if($TDG->deleteAlbum($id)){
+
+            }
+        }
+
+        static function ajouterImage($idUsager,$PathImages){
+            $TDG = TDGAlbum::getInstance();
+        }
+        
+
     }
 
+    /*
+    public class AlgoVerification{
 
-
+    }
+    */
 
 ?>

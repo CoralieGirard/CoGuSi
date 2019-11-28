@@ -17,13 +17,24 @@
         private static $instance = null;
 
 
-        public function __construct(){
+        private function __construct(){
             Parent::__construct();
             $this->tableName="Album"/*s*/;
 
         }
 
-        
+        public static getInstance(){
+            if($this->instance == null)
+            {
+                $this->instance = new TDGAlbum();
+                return $this->instance;
+            }
+            else
+            {
+                return $this->instance;
+            }
+
+        }
  
         public function createTable(){
             try{
@@ -54,8 +65,6 @@
 
         }
         
-      
-    
         public function dropTable(){
             try{
                 $conn = $this->connect();
@@ -73,6 +82,50 @@
             $conn = null;
             return $resp;
 
+        }
+
+        public function addAlbum($nomUsager,$titre,$description){
+            
+            try{
+            $conn = $this->connect();
+            $query = "INSERT INTO Album (:titre,:usager,:description,:dateCreation)";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':titre', $titre);
+            $stmt->bindParam(':usager', $nomUsager);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':dateCreation', date("Y-m-d H:i:s"));
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            }
+            catch(PDOException $e)
+            {
+                $result = false;
+            }
+            //fermeture de connection PDO
+            $conn = null;
+            return $result;
+
+        }
+
+        public function deleteAlbum($id){
+            try{
+                $conn = $this->connect();
+                $query = "DELETE FROM ". $this->tableName ." WHERE idAlbum=:id";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':id', $id);
+                $stmt->execute();
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $result = $stmt->fetchAll();
+            }
+             //error catch
+            catch(PDOException $e)
+            {
+                $result = false;
+            }
+            //fermeture de connection PDO
+            $conn = null;
+            return $result;
         }
 
         public function getAllAlbums(){
