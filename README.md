@@ -14,7 +14,7 @@ idAlbum INTEGER(10) AUTO_INCREMENT PRIMARY KEY,
 Titre VARCHAR(100),
 Proprietaire VARCHAR(40),
 Description LONGTEXT,
-DateCreation VARCHAR(40)
+DateCreation VARCHAR(30)
 );
 
 CREATE TABLE IF NOT EXISTS Image
@@ -23,7 +23,7 @@ idImage INTEGER(10) AUTO_INCREMENT PRIMARY KEY,
 URL VARCHAR(1000),
 idAlbum INT,
 Description VARCHAR(1000),
-DateCreation VARCHAR(40)
+DateCreation VARCHAR(30)
 );
 
 CREATE TABLE IF NOT EXISTS Commentaire
@@ -31,6 +31,6 @@ CREATE TABLE IF NOT EXISTS Commentaire
 idCommentaire INTEGER(10) AUTO_INCREMENT PRIMARY KEY,
 idType INT,
 Type VARCHAR(30),
-DateCreation VARCHAR(40),
+DateCreation VARCHAR(30),
 Contenu LONGTEXT
 );
