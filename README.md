@@ -28,6 +28,7 @@ DateCreation VARCHAR(40)
 CREATE TABLE IF NOT EXISTS Commentaire
 (
 idCommentaire INTEGER(10) AUTO_INCREMENT PRIMARY KEY,
+idType INT,
 Type VARCHAR(30),
 DateCreation VARCHAR(40),
 Contenu LONGTEXT
