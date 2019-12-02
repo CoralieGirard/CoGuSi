@@ -1,201 +1,201 @@
+
+
+
 <?php
-include_once __DIR__ . "/userTDG.PHP";
 
-class User{
+/*
+    Code source fait par: Joel Dusablon Senecal
+    modifié par: Simon Daudelin
+*/
 
-    private $id;
-    private $email;
-    private $username;
-    private $password;
+    include_once __DIR__. "/userTDG.php";
 
-    /*
-        utile si on utilise un factory pattern
-    */
-    public function __construct(){
-        //$this->id = $id;
-        //$this->email = $email;
-        //$this->username = $username;
-        //$this->password = $password;
-        //$this->TDG = new UserTDG;
-    }
+    class User{
+
+        private $id;
+        private $email;
+        private $username;
+        private $password;
+        private $image;
+
+        public function __construct(){
 
 
-    //getters
-    public function get_id(){
-        return $this->id;
-    }
-
-    public function get_email(){
-        return $this->email;
-    }
-
-    public function get_username(){
-        return $this->username;
-    }
-
-    public function get_password(){
-        return $this->password;
-    }
+        }
 
 
-    //setters
-    public function set_email($email){
-        $this->email = $email;
-    }
 
-    public function set_username($username){
-        $this->username = $username;
-    }
+        //Propriétés
+        //get
+        public function getId(){
+            return $this->id;
+        }
+    
+        public function getEmail(){
+            return $this->email;
+        }
+    
+        public function getUsername(){
+            return $this->username;
+        }
+    
+        public function getPassword(){
+            return $this->password;
+        }
 
-    public function set_password($password){
-        $this->password = $password;
-    }
+        //image***
 
 
-    /*
-        Quality of Life methods (Dans la langue de shakespear (ou QOLM pour les intimes))
-    */
-    public function load_user($email){
-        $TDG = new UserTDG();
-        $res = $TDG->get_by_email($email);
+        //set
+        public function setEmail($email){
+            $this->email = $email;
+        }
+    
+        public function setUsername($username){
+            $this->username = $username;
+        }
+    
+        public function setPassword($password){
+            $this->password = $password;
+        }
 
-        if(!$res)
-        {
+        //image***
+
+
+        //prendre toute les usagers pour les tests
+        public function loadUser($email){
+            $TDG = new UserTDG();
+            $resultat = $TDg->getByEmail($email);
+
+            if(!$resultat){
+                $TDG = null;
+                return false;
+            }
+
+            $this->id = $resultat['id'];
+            $this->email = $res['email'];
+            $this->username = $res['username'];
+            $this->password = $res['password'];
+    
             $TDG = null;
-            return false;
+            return true;
+        }
+ 
+        //validation du login
+        public function Login($email,$pw){
+
+            if(!$this->loadUser($email)){
+                return false;
+            }
+
+            if(!password_Verify($pw,$this->password)){
+                return false;
+            }
+
+            return true;
         }
 
-        $this->id = $res['id'];
-        $this->email = $res['email'];
-        $this->username = $res['username'];
-        $this->password = $res['password'];
+        //validation des enregistrements
+        public function validationEmailDisponible($email){
+            $TDG = new UserTDG();
+            $res = $TDG->get_by_email($email);
+            $TDG = null;
+            if($res)
+            {
+                return false;
+            }
+    
+            return true;
+        }
 
-        $TDG = null;
-        return true;
+        //s'enregistrer
+        public function register($email, $username, $pw, $vpw){
+
+
+            if(!($pw === $vpw) || empty($pw) || empty($vpw))
+            {
+                return false;
+            }
+
+            if(!$this->validationEmailDisponible($email)){
+                return false;
+            }
+
+            $TDG = new UserTDG();
+            $res = $TDG->ajouterUsager($email, $username, password_hash($pw, PASSWORD_DEFAULT));
+            $TDG = null;
+            return true;
+        }
+
+        public function updateUserInfo($email, $newmail, $newname){
+
+            //load user infos
+            if(!$this->loadUser($email))
+            {
+              return false;
+            }
+    
+            if(empty($this->id) || empty($newmail) || empty($newname)){
+              return false;
+            }
+    
+            //check if email is already used
+            if(!$this->validationEmailDisponible($newmail) && $email != $newmail)
+            {
+                return false;
+            }
+    
+            $this->email = $newmail;
+            $this->username = $newname;
+    
+            $TDG = new UserTDG();
+            $res = $TDG->updateInfo($this->email, $this->username, $this->id);
+    
+            if($res){
+              $_SESSION["userName"] = $this->username;
+              $_SESSION["userEmail"] = $this->email;
+            }
+    
+            $TDG = null;
+            return $res;
+        }
+
+        public function updateUserPw($email, $oldpw, $pw, $pwv){
+
+            //load user infos
+            if(!$this->loadUser($email))
+            {
+              return false;
+            }
+    
+            //check if passed param are valids
+            if(empty($pw) || $pw != $pwv){
+              return false;
+            }
+    
+            //verify password
+            if(!passwordVerify($oldpw, $this->password))
+            {
+                return false;
+            }
+    
+            //create TDG and update to new hash
+            $TDG = new UserTDG();
+            $NHP = password_hash($pw, PASSWORD_DEFAULT);
+            $res = $TDG->updatePassword($NHP, $this->id);
+            $this->password = $NHP;
+            $TDG = null;
+            //only return true if update_user_pw returned true
+            return $res;
+        }
+
+        public static function getByID($id){
+            $TDG = new UserTDG();
+            $res = $TDG->getById($id);
+            $TDG = null;
+            return $res["username"];
+        }
+        
+
     }
-
-
-    //Login Validation
-    public function Login($email, $pw){
-
-        // Regarde si l'utilisateur existes deja
-        if(!$this->load_user($email))
-        {
-            return false;
-        }
-
-        // Regarde si le password est verifiable
-        if(!password_verify($pw, $this->password))
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    //Register Validation
-    public function validate_email_not_exists($email){
-        $TDG = new UserTDG();
-        $res = $TDG->get_by_email($email);
-        $TDG = null;
-        if($res)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function register($email, $username, $pw, $vpw){
-
-        //check is both password are equals
-        if(!($pw === $vpw) || empty($pw) || empty($vpw))
-        {
-            return false;
-        }
-
-        //check if email is used
-        if(!$this->validate_email_not_exists($email))
-        {
-            return false;
-        }
-
-        //add user to DB
-        $TDG = new UserTDG();
-        $res = $TDG->add_user($email, $username, password_hash($pw, PASSWORD_DEFAULT));
-        $TDG = null;
-        return true;
-    }
-
-    public function update_user_info($email, $newmail, $newname){
-
-        //load user infos
-        if(!$this->load_user($email))
-        {
-          return false;
-        }
-
-        if(empty($this->id) || empty($newmail) || empty($newname)){
-          return false;
-        }
-
-        //check if email is already used
-        if(!$this->validate_email_not_exists($newmail) && $email != $newmail)
-        {
-            return false;
-        }
-
-        $this->email = $newmail;
-        $this->username = $newname;
-
-        $TDG = new UserTDG();
-        $res = $TDG->update_info($this->email, $this->username, $this->id);
-
-        if($res){
-          $_SESSION["userName"] = $this->username;
-          $_SESSION["userEmail"] = $this->email;
-        }
-
-        $TDG = null;
-        return $res;
-    }
-
-    /*
-      @var: current $email, oldpw, new pw, newpw validation
-    */
-    public function update_user_pw($email, $oldpw, $pw, $pwv){
-
-        //load user infos
-        if(!$this->load_user($email))
-        {
-          return false;
-        }
-
-        //check if passed param are valids
-        if(empty($pw) || $pw != $pwv){
-          return false;
-        }
-
-        //verify password
-        if(!password_verify($oldpw, $this->password))
-        {
-            return false;
-        }
-
-        //create TDG and update to new hash
-        $TDG = new UserTDG();
-        $NHP = password_hash($pw, PASSWORD_DEFAULT);
-        $res = $TDG->update_password($NHP, $this->id);
-        $this->password = $NHP;
-        $TDG = null;
-        //only return true if update_user_pw returned true
-        return $res;
-    }
-
-    public static function get_username_by_ID($id){
-        $TDG = new UserTDG();
-        $res = $TDG->get_by_id($id);
-        $TDG = null;
-        return $res["username"];
-    }
-}
+?>
