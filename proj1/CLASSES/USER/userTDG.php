@@ -1,6 +1,9 @@
 <?php
 
-include_once __DIR__ . "/../../UTILS/connector.php";
+/*
+    Code source fait par: Joel Dusablon Senecal
+    modifié par: Simon Daudelin
+*/
 
 class UserTDG extends DBAO{
 
@@ -9,37 +12,35 @@ class UserTDG extends DBAO{
 
     public function __construct(){
         Parent::__construct();
-        $this->tableName = "users";
+        $this->tableName = "Usager";
     }
 
-    //create table
-    public function createTable(){
 
+    //créer la table
+    public function createTable(){
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "CREATE TABLE IF NOT EXISTS $tableName (id INTEGER(10) AUTO INCREMENT PRIMARY KEY,
-            email VARCHAR(25) UNIQUE NOT NULL,
-            username VARCHAR(25) NOT NULL,
-            password VARCHAR(250) NOT NULL)";
+            $query = "CREATE TABLE IF NOT EXISTS Usager (idUser INTEGER(10) AUTO_INCREMENT PRIMARY KEY, 
+            Username VARCHAR(40) not null, 
+            Email VARCHAR(100) UNIQUE not null, 
+            Image LONGTEXT, 
+            Password VARCHAR(40) not null)";
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $resp = true;
         }
-
-        //error catch and msg display
         catch(PDOException $e)
         {
             $resp = false;
         }
-        //fermeture de connection PDO
+
         $conn = null;
         return $resp;
     }
 
-
-    //drop table
-    public function drop_table(){
+//drop la table
+    public function dropTable(){
 
         try{
             $conn = $this->connect();
@@ -60,20 +61,17 @@ class UserTDG extends DBAO{
         return $resp;
     }
 
-
-    public function get_by_id($id){
-
+    public function getById($id){
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "SELECT id, email, username FROM $tableName WHERE id=:id";
+            $query = "SELECT idUser, email, username FROM $tableName WHERE idUser=:id";
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':idUser', $id);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetch();
         }
-
         catch(PDOException $e)
         {
             echo "Error: " . $e->getMessage();
@@ -83,9 +81,7 @@ class UserTDG extends DBAO{
         return $result;
     }
 
-
-    public function get_by_email($email){
-
+    public function getByEmail($email){
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
@@ -96,7 +92,6 @@ class UserTDG extends DBAO{
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetch();
         }
-
         catch(PDOException $e)
         {
             echo "Error: " . $e->getMessage();
@@ -106,20 +101,17 @@ class UserTDG extends DBAO{
         return $result;
     }
 
-
-    public function get_by_username($username){
-
+    public function getByUsername($username){
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "SELECT * FROM $tableName WHERE username=:username";
+            $query = "SELECT * FROM $tableName WHERE username=:Username";
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':Username', $username);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetch();
         }
-
         catch(PDOException $e)
         {
             echo "Error: " . $e->getMessage();
@@ -129,13 +121,11 @@ class UserTDG extends DBAO{
         return $result;
     }
 
-
-    public function get_all_users(){
-
+    public function getAllUsager(){
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "SELECT id, email, username FROM $tableName";
+            $query = "SELECT idUser, email, username FROM $tableName";
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -151,9 +141,7 @@ class UserTDG extends DBAO{
         return $result;
     }
 
-
-    public function add_user($email, $username, $password){
-
+    public function ajouterUsager($email, $username, $password){
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
@@ -175,24 +163,18 @@ class UserTDG extends DBAO{
         return $resp;
     }
 
-
-    /*
-      update juste pour les infos non sensibles
-    */
-    public function update_info($email, $username, $id){
-
+    public function updateInfo($email, $username, $id){
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "UPDATE $tableName SET email=:email, username=:username WHERE id=:id";
+            $query = "UPDATE $tableName SET email=:email, username=:username WHERE idUser=:id";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':idUser', $id);
             $stmt->execute();
             $resp = true;
         }
-
         catch(PDOException $e)
         {
             $resp = false;
@@ -202,18 +184,14 @@ class UserTDG extends DBAO{
         return $resp;
     }
 
-    /*
-      update juste pour le password
-    */
-    public function update_password($NHP, $id){
-
+    public function updatePassword($password, $id){
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "UPDATE $tableName SET password=:password WHERE id=:id";
+            $query = "UPDATE $tableName SET password=:password WHERE idUser=:id";
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':password', $NHP);
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':idUser', $id);
             $stmt->execute();
             $resp = true;
         }
@@ -226,5 +204,6 @@ class UserTDG extends DBAO{
         $conn = null;
         return $resp;
     }
-
 }
+
+?>
