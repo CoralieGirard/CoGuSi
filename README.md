@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Album
 (
 idAlbum INTEGER(10) AUTO_INCREMENT PRIMARY KEY,
 Titre VARCHAR(100),
-Proprietaire VARCHAR(40),
+Proprietaire INT,
 Description LONGTEXT,
 DateCreation VARCHAR(30)
 );
