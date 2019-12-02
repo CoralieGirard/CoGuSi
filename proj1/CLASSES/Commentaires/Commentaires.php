@@ -93,7 +93,7 @@
             $DateCreation = $this->DateCreation;
             $Contenu = $this->Contenu;
             $Proprietaire = $this->Proprietaire;
-            include "HTML/posttemplate.php";/////////////////////////////////////////////////////////////////////////////////////////////////////////
+            include "HTML/commentairetemplate.php";
         }
 
         public function loadCommentaire($idCommentaire){
