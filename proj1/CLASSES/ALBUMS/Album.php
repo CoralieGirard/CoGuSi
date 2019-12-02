@@ -100,6 +100,9 @@
 
         static function ajouterImage($idUsager,$PathImages){
             $TDG = TDGAlbum::getInstance();
+            /*
+                AllerCherche Images Liés à l'Album :| 
+            */
         }
         
 
