@@ -1,8 +1,13 @@
 <?php
 
+/*
+    Code source fait par: Joel Dusablon Senecal
+    modifié par: Simon Daudelin
+*/
+
     class Validator{
 
-        public static function validate_email($email)
+        public static function validateEmail($email)
         {
             if(empty($email))
             {
@@ -17,7 +22,7 @@
             return false;
         }
 
-        public static function validate_password($password)
+        public static function validatePassword($password)
         {
             if(empty($password))
             {
@@ -56,9 +61,5 @@
             $input = strip_tags($input);
             return $input;
         }
-
-        
     }
-
-
 ?>
