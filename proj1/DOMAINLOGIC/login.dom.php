@@ -4,61 +4,32 @@
     Code source fait par: Joel Dusablon Senecal
     modifié par: Simon Daudelin
 */
+    include "../CLASSES/USER/user.php";
+    include __DIR__ . "/../UTILS/sessionhandler.php";
 
-  /*
-    fonction qui "set" toutes les variables de session quand un utilisateur
-    ce login.
-  */
-  function login($uID, $uEmail, $uName){
-    $_SESSION["userID"] = $uID ;
-    $_SESSION["userEmail"] = $uEmail;
-    $_SESSION["userName"] = $uName;
-    //Session timeout dans 15 minutes
-    $_SESSION["timeOut"] = time() + (60 * 15);
-    //renew_timeout
-    $_SESSION["innitTimeStamp"] = time();
-  }
 
-  /*
-    fonction qui valide si la Session est encore valide
-  */
-  function validateSession(){
-    // l'usager n'est pas valide si cette variable
-    // de session n'est pas definis
-    if(!isset($_SESSION["userID"])){
-        return false;
-    }
-    // si le timeout est arrivé, la session n'est plus valide
-    // on dois donc detruire la session
-    if(time() >= $_SESSION["timeOut"]){
-        endSession();
-        return false;
-    }
-    // Si la Session est active depuis plus de 30 mins,
-    // on change son PHP_sessionID
-    // peux aussi etre substituer par session_regenerate_id();
-    if(time() - $_SESSION["innitTimeStamp"] > (60 * 30)){
-        $uID = $_SESSION["userID"];
-        $uEmail = $_SESSION["userEmail"];
-        $uName = $_SESSION["userName"];
-        endSession();
-        session_start();
-        login($uID, $uEmail, $uName);
-        return true;
-    }
-    else {
-      $_SESSION["timeOut"] = time() + (60 * 15);
-      return true;
-    }
-  }
+    session_start();
 
-  /*
-    fonction qui detruit la session (logout dans la langue de shakespear)
-  */
-  function endSession(){
-    $_SESSION = array();
-    unset($_COOKIE["PHPSESSID"]);
-    session_destroy();
-  }
+    if(validateSession()){
+        header("Location: ../error.php?ErrorMSG=already%20logged%20in!");
+        die();
+    }
 
-?>
+    //prendre les variables du Post
+    $email = $_POST["email"];
+    $pw = $_POST["pw"];
+
+    //Validation Posts
+    $aUser = new User();
+
+    //validateLogin
+    if($aUser->Login($email, $pw))
+    {
+        login($aUser->getId(), $aUser->getEmail(), $aUser->getUsername());
+        header("Location: ../billboard.php");
+        die();
+    }
+
+    header("Location: ../error.php?ErrorMSG=invalid email or password");
+    die();
+    ?>
