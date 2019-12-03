@@ -1,4 +1,10 @@
 <?php
+
+/*
+    Code source fait par: Joel Dusablon Senecal
+    modifié par: Simon Daudelin
+*/
+
   /*
     fonction qui "set" toutes les variables de session quand un utilisateur
     ce login.
@@ -16,7 +22,7 @@
   /*
     fonction qui valide si la Session est encore valide
   */
-  function validate_session(){
+  function validateSession(){
     // l'usager n'est pas valide si cette variable
     // de session n'est pas definis
     if(!isset($_SESSION["userID"])){
@@ -25,7 +31,7 @@
     // si le timeout est arrivé, la session n'est plus valide
     // on dois donc detruire la session
     if(time() >= $_SESSION["timeOut"]){
-        end_session();
+        endSession();
         return false;
     }
     // Si la Session est active depuis plus de 30 mins,
@@ -35,7 +41,7 @@
         $uID = $_SESSION["userID"];
         $uEmail = $_SESSION["userEmail"];
         $uName = $_SESSION["userName"];
-        end_session();
+        endSession();
         session_start();
         login($uID, $uEmail, $uName);
         return true;
@@ -49,10 +55,9 @@
   /*
     fonction qui detruit la session (logout dans la langue de shakespear)
   */
-  function end_session(){
+  function endSession(){
     $_SESSION = array();
     unset($_COOKIE["PHPSESSID"]);
     session_destroy();
   }
-
 ?>
