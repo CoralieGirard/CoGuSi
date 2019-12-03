@@ -5,6 +5,8 @@
     modifié par: Simon Daudelin
 */
 
+include_once __DIR__ . "/../../UTILS/connector.php";
+
 class UserTDG extends DBAO{
 
     private $tableName;
