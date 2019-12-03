@@ -22,10 +22,17 @@
     $pwv = $_POST["pwValidation"];
 
     //Validation Posts
-    if(!Validator::validateEmail($email) || !Validator::validatePassword($pw))
+    if(!Validator::validateEmail($email))
     {
         http_response_code(400);
-        header("Location: ../error.php?ErrorMSG=invalid email or password");
+        header("Location: ../error.php?ErrorMSG=invalid email");
+        die();
+    }
+
+    if(!Validator::validatePassword($pw))
+    {
+        http_response_code(400);
+        header("Location: ../error.php?ErrorMSG=invalid password");
         die();
     }
 
