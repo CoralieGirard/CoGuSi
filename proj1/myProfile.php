@@ -2,7 +2,7 @@
     session_start();
     include "UTILS/sessionhandler.php";
 
-    if(!validate_session())
+    if(!validateSession())
     {
         header("Location: error.php?ErrorMSG=Not%20Logged%20in!");
         die();
