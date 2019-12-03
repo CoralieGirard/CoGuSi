@@ -1,11 +1,16 @@
 <?php
+
+/*
+    Code source fait par: Joel Dusablon Senecal
+    modifié par: Simon Daudelin
+*/
   include "../CLASSES/USER/user.php";
   include "../UTILS/formvalidator.php";
   include __DIR__ . "/../UTILS/sessionhandler.php";
   
   session_start();
 
-  if(!validate_session()){
+  if(!validateSession()){
     header("Location: ../error.php?ErrorMSG=Not%20logged%20in!");
     die();
   }
@@ -20,13 +25,13 @@
   $pwval = $_POST["pwValidation"];
 
 
-  if(!Validator::validate_password($newpw)){
+  if(!Validator::validatePassword($newpw)){
     header("Location: ../error.php?ErrorMSG=invalid%20password");
     die();
   }
 
-  $user = new User();
-  if(!$user->update_user_pw($_SESSION["userEmail"], $oldpw, $newpw, $pwval)){
+  $user = UserTDG::getInstance();
+  if(!$user->updatePassword($_SESSION["userEmail"], $oldpw, $newpw, $pwval)){
     header("Location: ../error.php?ErrorMSG=Bad%20request");
     die();
   }
