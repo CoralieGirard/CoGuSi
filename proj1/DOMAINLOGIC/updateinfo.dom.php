@@ -1,11 +1,16 @@
 <?php
+
+/*
+    Code source fait par: Joel Dusablon Senecal
+    modifié par: Simon Daudelin
+*/
   include "../CLASSES/USER/user.php";
   include "../UTILS/formvalidator.php";
   include __DIR__ . "/../UTILS/sessionhandler.php";
 
   session_start();
 
-  if(!validate_session()){
+  if(!validateSession()){
     header("Location: ../error.php?ErrorMSG=Not%20logged%20in!");
     die();
   }
@@ -33,7 +38,7 @@
     $newname = $_SESSION["userName"];
   }
 
-  $user = new User();
+  $user = UserTDG::getInstance();
   if(!$user->update_user_info($_SESSION["userEmail"], $newmail, $newname)){
     header("Location: ../error.php?ErrorMSG=invalid%20request");
     die();
