@@ -4,7 +4,7 @@
 
     $title = "billboard";
 
-    if(validate_session()){
+    if(validateSession()){
         $name = $_SESSION["userName"];
     }
     else{
