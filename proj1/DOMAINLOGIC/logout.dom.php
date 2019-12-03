@@ -1,9 +1,14 @@
 <?php
+
+/*
+    Code source fait par: Joel Dusablon Senecal
+    modifié par: Simon Daudelin
+*/
     include __DIR__ . "/../UTILS/sessionhandler.php";
 
     session_start();
 
-    if(!validate_session()){
+    if(!validateSession()){
         header("Location: ../error.php?ErrorMSG=Not%20logged%20in!");
         die();
     }
