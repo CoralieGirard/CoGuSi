@@ -3,7 +3,7 @@
     $title = "logout";
     include "UTILS/sessionhandler.php";
 
-    if(validate_session())
+    if(validateSession())
     {
         header("Location: error.php?ErrorMSG=Already%20Logged!");
         die();
