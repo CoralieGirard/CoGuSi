@@ -20,7 +20,6 @@
 
         public function __construct(){
 
-
         }
 
 
@@ -64,25 +63,25 @@
 
         //prendre toute les usagers pour les tests
         public function loadUser($email){
-            $TDG = new UserTDG();
-            $resultat = $TDg->getByEmail($email);
+            $TDG = UserTDG::getInstance();
+            $resultat = $TDG->getByEmail($email);
 
             if(!$resultat){
                 $TDG = null;
                 return false;
             }
 
-            $this->id = $resultat['id'];
-            $this->email = $res['email'];
-            $this->username = $res['username'];
-            $this->password = $res['password'];
+            $this->id = $resultat['idUser'];
+            $this->email = $res['Email'];
+            $this->username = $res['Username'];
+            $this->password = $res['Password'];
     
             $TDG = null;
             return true;
         }
  
         //validation du login
-        public function Login($email,$pw){
+        public function login($email,$pw){
 
             if(!$this->loadUser($email)){
                 return false;
@@ -97,8 +96,8 @@
 
         //validation des enregistrements
         public function validationEmailDisponible($email){
-            $TDG = new UserTDG();
-            $res = $TDG->get_by_email($email);
+            $TDG = UserTDG::getInstance();
+            $res = $TDG->getByEmail($email);
             $TDG = null;
             if($res)
             {
@@ -121,7 +120,7 @@
                 return false;
             }
 
-            $TDG = new UserTDG();
+            $TDG = UserTDG::getInstance();
             $res = $TDG->ajouterUsager($email, $username, password_hash($pw, PASSWORD_DEFAULT));
             $TDG = null;
             return true;
@@ -148,7 +147,7 @@
             $this->email = $newmail;
             $this->username = $newname;
     
-            $TDG = new UserTDG();
+            $TDG = UserTDG::getInstance();
             $res = $TDG->updateInfo($this->email, $this->username, $this->id);
     
             if($res){
@@ -180,7 +179,7 @@
             }
     
             //create TDG and update to new hash
-            $TDG = new UserTDG();
+            $TDG = UserTDG::getInstance();
             $NHP = password_hash($pw, PASSWORD_DEFAULT);
             $res = $TDG->updatePassword($NHP, $this->id);
             $this->password = $NHP;
@@ -190,12 +189,10 @@
         }
 
         public static function getByID($id){
-            $TDG = new UserTDG();
+            $TDG = UserTDG::getInstance();
             $res = $TDG->getById($id);
             $TDG = null;
-            return $res["username"];
+            return $res["Username"];
         }
-        
-
     }
 ?>
