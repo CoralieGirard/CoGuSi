@@ -1,11 +1,16 @@
 <?php
+
+/*
+    Code source fait par: Joel Dusablon Senecal
+    modifié par: Simon Daudelin
+*/
     include "../CLASSES/USER/user.php";
     include "../UTILS/formvalidator.php";
     include __DIR__ . "/../UTILS/sessionhandler.php";
 
     session_start();
 
-    if(validate_session()){
+    if(validateSession()){
         header("Location: ../error.php?ErrorMSG=Already%20logged!");
         die();
     }
@@ -17,7 +22,7 @@
     $pwv = $_POST["pwValidation"];
 
     //Validation Posts
-    if(!Validator::validate_email($email) || !Validator::validate_password($pw))
+    if(!Validator::validateEmail($email) || !Validator::validate_password($pw))
     {
         http_response_code(400);
         header("Location: ../error.php?ErrorMSG=invalid email or password");
