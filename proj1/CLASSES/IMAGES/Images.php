@@ -180,7 +180,7 @@ class Images{
     }
 
     public static function createImageList(){
-        $TDGRes = Thread::listAllImages();
+        $TDGRes = Images::listAllImages();
         $imagesList = array();
 
         foreach($TDGRes as $r){
@@ -189,7 +189,7 @@ class Images{
             $image->setURL($r["URL"]);
             $image->setIdAlbum($r["idAlbum"]);
             $image->setDescription($r["Description"]);
-            $image->setDateCreatetion($r["DateCreation"]);
+            $image->setDateCreation($r["DateCreation"]);
             array_push($imagesList, $image);
         }
 
