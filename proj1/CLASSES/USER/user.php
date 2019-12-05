@@ -96,15 +96,19 @@
 
         //validation des enregistrements
         public function validationEmailDisponible($email){
+
             $TDG = UserTDG::getInstance();
+
             $res = $TDG->getByEmail($email);
+
             $TDG = null;
-            if($res)
+
+            if(!$res)
             {
-                return false;
+                return true;
             }
     
-            return true;
+            return false;
         }
 
         //s'enregistrer
@@ -123,7 +127,8 @@
             $TDG = UserTDG::getInstance();
             $res = $TDG->ajouterUsager($email, $username, password_hash($pw, PASSWORD_DEFAULT));
             $TDG = null;
-            return true;
+            return $res;
+
         }
 
         public function updateUserInfo($email, $newmail, $newname){
