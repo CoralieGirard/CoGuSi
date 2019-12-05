@@ -42,7 +42,9 @@
             return $this->password;
         }
 
-        //image***
+        public function getImage(){
+            return $this->image;
+        }
 
 
         //set
@@ -75,6 +77,7 @@
             $this->email = $resultat['Email'];
             $this->username = $resultat['Username'];
             $this->password = $resultat['Password'];
+            $this->image = $resultat['Image'];
     
             $TDG = null;
             return true;
@@ -193,7 +196,20 @@
             return $res;
         }
 
+        public function updateUserImage($email,$urlImage){
+            $TDG = UserTDG::getInstance();
+            $res = $TDG->updatePassword($NHP, $this->id);
+            $this->password = $NHP;
+            $TDG = null;
+        }
+
         public static function getByID($id){
+            if(!$this->loadUser($email))
+            {
+              return false;
+            }
+    
+
             $TDG = UserTDG::getInstance();
             $res = $TDG->getById($id);
             $TDG = null;

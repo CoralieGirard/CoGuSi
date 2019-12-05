@@ -73,7 +73,7 @@ class UserTDG extends DBAO{
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "SELECT idUser, Email, Username FROM $tableName WHERE idUser=:id";
+            $query = "SELECT idUser, Email, Username, Image FROM $tableName WHERE idUser=:id";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':idUser', $id);
             $stmt->execute();
@@ -209,6 +209,26 @@ class UserTDG extends DBAO{
         //fermeture de connection PDO
         $conn = null;
         return $resp;
+    }
+
+    public function updateImage($image,$id){
+        $conn = $this->connect();
+            $tableName = $this->tableName;
+            $query = "UPDATE $tableName SET Image=:image WHERE idUser=:id";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $resp = true;
+        }
+        catch(PDOException $e)
+        {
+            $resp = false;
+        }
+        //fermeture de connection PDO
+        $conn = null;
+        return $resp;
+
     }
 }
 
