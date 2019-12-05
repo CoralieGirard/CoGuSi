@@ -178,7 +178,7 @@ class UserTDG extends DBAO{
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':idUser', $id);
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
             $resp = true;
         }
@@ -198,7 +198,7 @@ class UserTDG extends DBAO{
             $query = "UPDATE $tableName SET Password=:password WHERE idUser=:id";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':password', $password);
-            $stmt->bindParam(':idUser', $id);
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
             $resp = true;
         }
