@@ -31,7 +31,8 @@ class ImagesTDG extends DBAO{
             URL VARCHAR(1000),
             idAlbum INT,
             Description VARCHAR(1000),
-            DateCreation VARCHAR(30))";
+            DateCreation VARCHAR(30)),
+            likes INT";
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $resp = true;
@@ -154,12 +155,32 @@ class ImagesTDG extends DBAO{
         return $result;
     }
 
+    public function getLikes()
+    {
+        try{
+            $conn = $this->connect();
+            $query = "SELECT likes FROM ". $this->tableName;
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch();
+        }
+
+        catch(PDOException $e)
+        {
+            return false;
+        }
+        //fermeture de connection PDO
+        $conn = null;
+        return $result;
+    }
+
     public function addImage($URL, $idAlbum, $description, $DateCreation){
 
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "INSERT INTO $tableName (URL, idAlbum, Description, DateCreation) VALUES (:URL, :idAlbum, :description, :date)";
+            $query = "INSERT INTO $tableName (URL, idAlbum, Description, DateCreation, likes) VALUES (:URL, :idAlbum, :description, :date, 0)";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':URL', $URL);
             $stmt->bindParam(':idAlbum', $idAlbum);

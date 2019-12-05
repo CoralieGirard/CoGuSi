@@ -12,6 +12,7 @@ class Images{
     private $Description;
     private $DateCreation;
     private $Commentaires;
+    private $likes;
 
     public function __construct(){
       $this->Commentaires = array();
@@ -38,6 +39,10 @@ class Images{
         return $this->DateCreation;
     }
 
+    public function getLikes(){
+        return $this->likes;
+    }
+
     //setters
     public function setIdImage($idImage){
         $this->idImage = $idImage;
@@ -59,6 +64,10 @@ class Images{
         $this->DateCreation = $dateCreation;
     }
 
+    public function setLikes($likes){
+        $this->likes = $likes;
+    }
+
     /*
         Quality of Life methods (Dans la langue de shakespear (ou QOLM pour les intimes))
     */
@@ -75,6 +84,7 @@ class Images{
         $this->idAlbum = $res["idAlbum"];
         $this->Description = $res["Description"];
         $this->DateCreation = $res["DateCreation"];
+        $this->likes = $res["likes"];
 
         return true;
     }
@@ -92,6 +102,7 @@ class Images{
         $this->idAlbum = $res["idAlbum"];
         $this->Description = $res["Description"];
         $this->DateCreation = $res["DateCreation"];
+        $this->likes = $res["likes"];
 
         return true;
     }
@@ -109,6 +120,7 @@ class Images{
         $this->idAlbum = $res["idAlbum"];
         $this->Description = $res["Description"];
         $this->DateCreation = $res["DateCreation"];
+        $this->likes = $res["likes"];
 
         return true;
     }
@@ -163,6 +175,11 @@ class Images{
                 $Commentaire >display();
               }
         }
+    }
+
+    public function nbLikes()
+    {
+        return ImagesTDG::getInstance().getLikes();
     }
 
     /*
