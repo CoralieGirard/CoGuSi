@@ -11,6 +11,7 @@
         private $DateCreation;
         private $Contenu;
         private $Proprietaire;
+        private $likes;
 
         //getters
         public function getIdCommentaire(){
@@ -37,6 +38,10 @@
             return $this->Proprietaire;
         }
 
+        public function getLikes(){
+            return $this->likes;
+        }
+
         //setters
         public function setIdCommentaire($idCommentaire){
             $this->idCommenaire = $idCommentaire;
@@ -60,6 +65,10 @@
 
         public function setProprietaire($Proprietaire){
             $this->Proprietaire = $Proprietaire;
+        }
+
+        public function setLikes($likes){
+            $this->likes = $likes;
         }
 
         //QOL
@@ -112,6 +121,11 @@
             return $res;
         }
 
+        public function nbLikes()
+        {
+            return CommentaireTDG::getInstance().getLikes();
+        }
+
 
         /*
           static function used to create a list of posts
@@ -125,11 +139,11 @@
 
         public static function createCommentaireList($idType, $type){
 
-            $infoArray=Commentaire::fetchCommentaireByType($idType, $type);
+            $infoArray=Commentaires::fetchCommentaireByType($idType, $type);
             $commentaireList = array();
 
             foreach($infoArray as $ia){
-                $tempCommentaire = new Commentaire();
+                $tempCommentaire = new Commentaires();
                 $tempCommentaire->setIdCommentaire($ia["idCommentaire"]);
                 $tempCommentaire->setProprietaire($ia["Proprietaire"]);
                 $tempCommentaire->setIdType($ia["idType"]);
