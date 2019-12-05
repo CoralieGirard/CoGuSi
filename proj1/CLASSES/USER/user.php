@@ -72,9 +72,9 @@
             }
 
             $this->id = $resultat['idUser'];
-            $this->email = $res['Email'];
-            $this->username = $res['Username'];
-            $this->password = $res['Password'];
+            $this->email = $resultat['Email'];
+            $this->username = $resultat['Username'];
+            $this->password = $resultat['Password'];
     
             $TDG = null;
             return true;
