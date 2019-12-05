@@ -63,7 +63,7 @@ class Images{
         Quality of Life methods (Dans la langue de shakespear (ou QOLM pour les intimes))
     */
     public function loadImageById($idImage){
-        $TDG = ImageTDG::getInstance();
+        $TDG = ImagesTDG::getInstance();
         $res = $TDG->getByIdImage($idImage);
 
         if(!$res){
@@ -148,7 +148,7 @@ class Images{
         $this->Commentaires = $res;
     }
 
-    public function displayCommentaire(){
+    public function displayCommentaire(){ //////////////////////////////////////////////////////////
         if(empty($this->Commentaires)){
             $this->loadCommentaires();
         }
