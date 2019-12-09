@@ -214,4 +214,11 @@ class Images{
         return $imagesList;
     }
 
+    public static function getURLById($idImage)
+    {
+        $TDG = ImagesTDG::getInstance();
+        $res = $TDG.getByIdImage($idImage);
+        return $res["URL"];
+    }
+
 }
