@@ -39,7 +39,7 @@
   }
 
   $user = UserTDG::getInstance();
-  if(!$user->update_user_info($_SESSION["userEmail"], $newmail, $newname)){
+  if(!$user->updateUserInfo($_SESSION["userEmail"], $newmail, $newname)){
     header("Location: ../error.php?ErrorMSG=invalid%20request");
     die();
   }
