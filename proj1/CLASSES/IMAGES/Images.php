@@ -2,6 +2,7 @@
 
 include_once __DIR__ . "/ImagesTDG.php";
 include_once __DIR__ . "/../Commentaires/Commentaires.php";
+include_once __DIR__ . "/../ALBUMS/Album.php";
 date_default_timezone_set("America/New_York");
 
 class Images{
@@ -107,24 +108,6 @@ class Images{
         return true;
     }
 
-    public function loadImageByDateCreation($date){
-        $TDG = ImagesTDG::getInstance();
-        $res = $TDG->getByDateCreation($date);
-
-        if(!$res){
-            return false;
-        }
-
-        $this->idImage = $res["idImage"];
-        $this->URL = $res["URL"];
-        $this->idAlbum = $res["idAlbum"];
-        $this->Description = $res["Description"];
-        $this->DateCreation = $res["DateCreation"];
-        $this->likes = $res["likes"];
-
-        return true;
-    }
-
     public function addImage($URL, $idAlbum, $description){
         $TDG = ImagesTDG::getInstance();
         $dateCreation = date("Y-m-d H:i:s");
@@ -145,6 +128,14 @@ class Images{
         $DateCreation = $this->DateCreation;
         $likes = $this->likes;
         include __DIR__ . "/../HTML/templateImage.php";
+    }
+
+    public function deleteImage()
+    {
+        $TDG = imagesTDG::getInstance();
+        $res = $TDG->deleteImage($this->idImage);
+        $TDG = null;
+        return $res;
     }
 
     /*
@@ -181,6 +172,12 @@ class Images{
     public function nbLikes()
     {
         return ImagesTDG::getInstance().getLikes();
+    }
+
+    public function getProprietaire()
+    {
+        $res = Album::getProprietaireById($this->idAlbum);
+        return $res["Proprietaire"];
     }
 
     /*

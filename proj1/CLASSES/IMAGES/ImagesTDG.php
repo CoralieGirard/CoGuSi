@@ -218,4 +218,26 @@ class ImagesTDG extends DBAO{
         $conn = null;
         return $res;
     }
+
+    public function deleteImage($idImage)
+    {
+        
+        try{
+            $conn = $this->connect();
+            $tableName = $this->tableName;
+            $query = "DELETE FROM $tableName WHERE idImage=:idImage";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':idImage', $idImage);
+            $stmt->execute();
+            $resp = true;
+        }
+
+        catch(PDOException $e)
+        {
+            $resp = false;
+        }
+        //fermeture de connection PDO
+        $conn = null;
+        return $resp;
+    }
 }
