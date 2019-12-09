@@ -43,7 +43,7 @@
             return $this->password;
         }
 
-        public function getImage(){
+        public function getidImage(){
             return $this->idImage;
         }
 
@@ -78,7 +78,7 @@
             $this->email = $resultat['Email'];
             $this->username = $resultat['Username'];
             $this->password = $resultat['Password'];
-            $this->image = $resultat['idImage'];
+            $this->idImage = $resultat['idImage'];
     
             $TDG = null;
             return true;
