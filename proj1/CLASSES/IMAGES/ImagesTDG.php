@@ -155,6 +155,27 @@ class ImagesTDG extends DBAO{
         return $result;
     }
 
+    public function getByURL($URL){
+
+        try{
+            $conn = $this->connect();
+            $query = "SELECT * FROM ". $this->tableName ." WHERE URL=:url";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':url', $URL);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch();
+        }
+
+        catch(PDOException $e)
+        {
+            return false;
+        }
+        //fermeture de connection PDO
+        $conn = null;
+        return $result;
+    }
+
     public function getLikes()
     {
         try{

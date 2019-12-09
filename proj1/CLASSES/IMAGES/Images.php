@@ -137,13 +137,14 @@ class Images{
         return $res;
     }
 
-    public function displayImage(){ /////////////////////////////////////////////////////////////////////////////////////////////////
-        $title = $this->title;
-        $id = $this->id;
-        echo "<div class='card bg-dark mb-4'>";
-        echo "<div class='card-header text-left '><a href='displaythread.php?threadID=$id&threadTitle=$title'><h5>$title</h5></a>";
-        echo "</div>";
-        echo "</div>";
+    public function displayImage(){
+        $idImage = $this->idImage;;
+        $URL = $this->URL;
+        $idAlbum = $this->idAlbum;
+        $Description = $this->Description;
+        $DateCreation = $this->DateCreation;
+        $likes = $this->likes;
+        include __DIR__ . "/../HTML/templateImage.php";
     }
 
     /*
