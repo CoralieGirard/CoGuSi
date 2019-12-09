@@ -65,6 +65,7 @@
             */
 
         }
+        
 
         /**
          * En cours, cette fonction cree Du HTML
@@ -77,6 +78,11 @@
 
         public function toTable(){
 
+        }
+        
+        public static function getProprietaireByIdAlbum($idAlbum)
+        {
+            return ;
         }
 
     }
