@@ -1,5 +1,5 @@
 <?php
-    include "CLASSES/ALBUMS/album.php";
+    include "CLASSES/ALBUMS/Album.php";
     $thread_list = Thread::createAlbumList();
 ?>
 
