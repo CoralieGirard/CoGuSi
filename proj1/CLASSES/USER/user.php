@@ -135,7 +135,7 @@
 
         }
 
-        public function updateUserInfo($email, $newmail, $newname,$idImage){
+        public function updateUserInfo($email, $newmail, $newname, $idImage = 0){
 
             //load user infos
             if(!$this->loadUser($email))
