@@ -149,15 +149,16 @@ class UserTDG extends DBAO{
         return $result;
     }
 
-    public function ajouterUsager($email, $username, $password){
+    public function ajouterUsager($email, $username, $password,$idImage = 1){
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "INSERT INTO $tableName (Email, Username, Password) VALUES (:email, :username, :password)";
+            $query = "INSERT INTO $tableName (Email, Username, Password,idImage) VALUES (:email, :username, :password,:idimage)";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':idImage', $idImage);
             $stmt->execute();
             $resp =  true;
         }
@@ -212,8 +213,7 @@ class UserTDG extends DBAO{
     }
 
     public function updateImage($image,$id){
-        try
-        {
+        try{
         $conn = $this->connect();
             $tableName = $this->tableName;
             $query = "UPDATE $tableName SET Image=:image WHERE idUser=:id";

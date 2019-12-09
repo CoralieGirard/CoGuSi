@@ -16,7 +16,8 @@
         private $email;
         private $username;
         private $password;
-        private $image;
+        private $idImage;
+
 
         public function __construct(){
 
@@ -43,7 +44,7 @@
         }
 
         public function getImage(){
-            return $this->image;
+            return $this->idImage;
         }
 
 
@@ -77,7 +78,7 @@
             $this->email = $resultat['Email'];
             $this->username = $resultat['Username'];
             $this->password = $resultat['Password'];
-            $this->image = $resultat['Image'];
+            $this->image = $resultat['idImage'];
     
             $TDG = null;
             return true;
@@ -134,7 +135,7 @@
 
         }
 
-        public function updateUserInfo($email, $newmail, $newname){
+        public function updateUserInfo($email, $newmail, $newname,$idImage){
 
             //load user infos
             if(!$this->loadUser($email))
@@ -156,7 +157,7 @@
             $this->username = $newname;
     
             $TDG = UserTDG::getInstance();
-            $res = $TDG->updateInfo($this->email, $this->username, $this->id);
+            $res = $TDG->updateInfo($this->email, $this->username, $this->id,$this->idImage);
     
             if($res){
               $_SESSION["userName"] = $this->username;
@@ -203,7 +204,8 @@
             $TDG = null;
         }
 
-        public static function getByID($id){
+        public  function getByID($id){
+
             if(!$this->loadUser($email))
             {
               return false;
@@ -215,5 +217,7 @@
             $TDG = null;
             return $res["Username"];
         }
+
+        
     }
 ?>
