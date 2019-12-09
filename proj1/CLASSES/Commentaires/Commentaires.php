@@ -1,6 +1,7 @@
 <?php
-    include "CommentairesTDG.php";
-    include __DIR__ . "/../USER/User.php";
+    include_once "CommentairesTDG.php";
+    include_once __DIR__ . "/../USER/User.php";
+    
     date_default_timezone_set("America/New_York");
 
     class Commentaires{
@@ -11,7 +12,6 @@
         private $DateCreation;
         private $Contenu;
         private $Proprietaire;
-        private $likes;
 
         //getters
         public function getIdCommentaire(){
@@ -38,10 +38,6 @@
             return $this->Proprietaire;
         }
 
-        public function getLikes(){
-            return $this->likes;
-        }
-
         //setters
         public function setIdCommentaire($idCommentaire){
             $this->idCommenaire = $idCommentaire;
@@ -65,10 +61,6 @@
 
         public function setProprietaire($Proprietaire){
             $this->Proprietaire = $Proprietaire;
-        }
-
-        public function setLikes($likes){
-            $this->likes = $likes;
         }
 
         //QOL
@@ -102,7 +94,6 @@
             $DateCreation = $this->DateCreation;
             $Contenu = $this->Contenu;
             $Proprietaire = $this->Proprietaire;
-            $auteur = User::getById($Proprietaire);
             include "HTML/commentairetemplate.php";
         }
 
@@ -121,11 +112,6 @@
             return $res;
         }
 
-        public function nbLikes()
-        {
-            return CommentaireTDG::getInstance().getLikes();
-        }
-
 
         /*
           static function used to create a list of posts
@@ -137,13 +123,13 @@
             return $res;
         }
 
-        public static function createCommentaireList($idType, $type){
+        public static function createCommentaireList($idType){
 
-            $infoArray=Commentaires::fetchCommentaireByType($idType, $type);
+            $infoArray=Commentaire::fetchCommentaireByType($idType);
             $commentaireList = array();
 
             foreach($infoArray as $ia){
-                $tempCommentaire = new Commentaires();
+                $tempCommentaire = new Commentaire();
                 $tempCommentaire->setIdCommentaire($ia["idCommentaire"]);
                 $tempCommentaire->setProprietaire($ia["Proprietaire"]);
                 $tempCommentaire->setIdType($ia["idType"]);
@@ -155,7 +141,6 @@
 
             return $commentaireList;
         }
-
 
     }
 

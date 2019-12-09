@@ -27,6 +27,7 @@
   if(!empty($email) && Validator::validateEmail($email)){
     $newmail = $email;
   }
+
   else{
     $newmail = $_SESSION["userEmail"];
   }
@@ -38,7 +39,7 @@
     $newname = $_SESSION["userName"];
   }
 
-  $user = UserTDG::getInstance();
+   $user = new user();
   if(!$user->updateUserInfo($_SESSION["userEmail"], $newmail, $newname)){
     header("Location: ../error.php?ErrorMSG=invalid%20request");
     die();

@@ -2,7 +2,7 @@
     session_start();
     include "UTILS/sessionhandler.php";
 
-    $title = "album";
+    $title = "billboard";
 
     if(validateSession()){
         $name = $_SESSION["userName"];
@@ -13,10 +13,15 @@
 
     $content = array();
 
-    
-    $module = "billboardview.php";
-    array_push($content, $module);
-    
+    if(isset($_GET["id"]))
+    {
+        $module = "displaythreadview.php";
+        array_push($content, $module);
+    }
+    else{
+        $module = "billboardview.php";
+        array_push($content, $module);
+    }
     require_once __DIR__ . "/HTML/masterpage.php";
 
 ?>

@@ -65,7 +65,6 @@
             */
 
         }
-        
 
         /**
          * En cours, cette fonction cree Du HTML
@@ -78,13 +77,6 @@
 
         public function toTable(){
 
-        }
-        
-        public static function getProprietaireByIdAlbum($idAlbum)
-        {
-            $TDG = TDGAlbum.getInstance();
-            $res = TDG.getById($idAlbum);
-            return $res;
         }
 
     }

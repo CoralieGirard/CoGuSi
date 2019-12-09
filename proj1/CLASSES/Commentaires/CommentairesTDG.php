@@ -32,8 +32,7 @@ class commentaireTDG extends DBAO{
             Type VARCHAR(30),
             DateCreation VARCHAR(30),
             Contenu LONGTEXT,
-            Proprietaire VARHCAR(40),
-            likes INT)";
+            Proprietaire VARHCAR(40))";
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $resp = true;
@@ -202,34 +201,13 @@ class commentaireTDG extends DBAO{
         return $result;
     }
 
-    public function getLikes(){
-
-        try{
-            $conn = $this->connect();
-            $query = "SELECT likes FROM ". $this->tableName;
-            $stmt = $conn->prepare($query);
-            $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetch();
-        }
-
-        catch(PDOException $e)
-        {
-            echo "Error: " . $e->getMessage();
-        }
-        //fermeture de connection PDO
-        $conn = null;
-        return $result;
-    }
-
-
 
     public function addCommentaire($idType, $type, $date, $content, $proprietaire){
 
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "INSERT INTO $tableName (idType, Type, DateCreation, Contenu, proprietaire, likes) VALUES (:idType, :Type, :Date, :contenu, :proprietaire, 0)";
+            $query = "INSERT INTO $tableName (idType, Type, DateCreation, Contenu, proprietaire) VALUES (:idType, :Type, :Date, :contenu, :proprietaire)";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':idType', $idType);
             $stmt->bindParam(':Type', $type);

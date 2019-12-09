@@ -4,7 +4,7 @@
     Code source fait par: Joel Dusablon Senecal
     modifié par: Simon Daudelin
 */
-    include "../CLASSES/USER/user.php";
+    include_once "../CLASSES/USER/user.php";
     include __DIR__ . "/../UTILS/sessionhandler.php";
 
 

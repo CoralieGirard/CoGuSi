@@ -55,7 +55,18 @@
               <button class="btn btn-success mb-sm-3" type="submit">Change Password</button>
             </form>
           </div>
-
-
+          <div class="container align-middle border mb-sm-5">
+          <img src=
+          <?php
+            include_once __DIR__."/../CLASSES\\USER\\user.php";
+            include __DIR__."/../CLASSES\\IMAGES\\Images.php";
+            $Bob = new User();
+            $Bob->loadUser($_SESSION["userEmail"]);
+            $ImageURL = Images::getURLById($Bob->getImage());
+          
+            echo $ImageURL;
+          ?> 
+          />
+          </div>
     </div>
 </div>
