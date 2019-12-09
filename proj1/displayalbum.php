@@ -19,8 +19,8 @@
   }
 
   $content = array();
-  array_push($content, "postlistview.php");
-  array_push($content, "postcreateview.php");
+  array_push($content, "commentairelistview.php");
+  array_push($content, "commentairecreateview.php");
 
   require_once __DIR__ . "/HTML/masterpage.php";
 
