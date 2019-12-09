@@ -1,7 +1,6 @@
 <?php
 
 include_once __DIR__ . "/ImagesTDG.php";
-include_once __DIR__ . "/../Commentaires/Commentaires.php";
 include_once __DIR__ . "/../ALBUMS/Album.php";
 date_default_timezone_set("America/New_York");
 
@@ -136,37 +135,6 @@ class Images{
         $res = $TDG->deleteImage($this->idImage);
         $TDG = null;
         return $res;
-    }
-
-    /*
-    Post related functions
-    */
-    public function loadCommentaires(){
-        $res = Commentaires::createCommentaireList($this->idImage, "Image");
-
-        if(!$res)
-        {
-            return false;
-        }
-
-        $this->Commentaires = $res;
-    }
-
-    public function displayCommentaire(){ //////////////////////////////////////////////////////////
-        if(empty($this->Commentaires)){
-            $this->loadCommentaires();
-        }
-
-        if(empty($this->Commentaires))
-        {
-            echo "<h3 class='mb-4'>Aucun commentaire</h3>";
-        }
-        else{
-
-            foreach($this->Commentaires as $Commentaires => $Commentaire){
-                $Commentaire >display();
-              }
-        }
     }
 
     public function nbLikes()
