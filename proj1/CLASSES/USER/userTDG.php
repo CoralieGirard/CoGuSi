@@ -212,6 +212,8 @@ class UserTDG extends DBAO{
     }
 
     public function updateImage($image,$id){
+        try
+        {
         $conn = $this->connect();
             $tableName = $this->tableName;
             $query = "UPDATE $tableName SET Image=:image WHERE idUser=:id";
