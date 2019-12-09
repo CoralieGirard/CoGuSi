@@ -1,14 +1,14 @@
 
 <?php
 //  Fait par Simon
-    include "./USER/userTDG.php";
-    $userList = getByUsername($_GET["search"]);
+    include "./ALBUMS/TDGAlbum.php";
+    $albumList = getAllAlbums($_GET["search"]);
 ?>
 
 <h1 class="my-4">Search results:</h1>
 <?php
- foreach($userList as $user){
-
+ foreach($albumList as $album){
+    
     }
   }
 ?>
