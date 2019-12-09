@@ -62,7 +62,7 @@
             include __DIR__."/../CLASSES\\IMAGES\\Images.php";
             $Bob = new User();
             $Bob->loadUser($_SESSION["userEmail"]);
-            $ImageURL = Images::getURLById($Bob->getImage());
+            $ImageURL = Images::getURLById($Bob->getidImage());
           
             echo $ImageURL;
           ?> 
