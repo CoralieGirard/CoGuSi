@@ -24,7 +24,7 @@
     die();
   }
 
-  if(!empty($email) && Validator::validate_email($email)){
+  if(!empty($email) && Validator::validateEmail($email)){
     $newmail = $email;
   }
   else{
