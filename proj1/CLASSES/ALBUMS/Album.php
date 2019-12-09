@@ -82,7 +82,7 @@
         
         public static function getProprietaireByIdAlbum($idAlbum)
         {
-            $TDG = AlbumTDG.getInstance();
+            $TDG = TDGAlbum.getInstance();
             $res = TDG.getById($idAlbum);
             return $res;
         }
