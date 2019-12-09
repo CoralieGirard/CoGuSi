@@ -1,13 +1,13 @@
 <?php
   session_start();
 
-  if(!isset($_GET["threadTitle"])){
+  if(!isset($_GET["albumTitle"])){
     header("Location: error.php?ErrorMSG=Bad%20Request!");
     die();
   }
 
-  $title=$_GET["threadTitle"];
-  $id = $_GET["threadID"];
+  $title=$_GET["albumTitle"];
+  $id = $_GET["albumID"];
 
   if(isset($_COOKIE["$id"]))
   {
