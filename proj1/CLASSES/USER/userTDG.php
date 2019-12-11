@@ -14,7 +14,7 @@ class UserTDG extends DBAO{
 
     public function __construct(){
         Parent::__construct();
-        $this->tableName = "Usager";
+        $this->tableName = "usager";
     }
 
     public static function getInstance(){
@@ -27,6 +27,7 @@ class UserTDG extends DBAO{
 
     //créer la table
     public function createTable(){
+        
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
@@ -149,23 +150,31 @@ class UserTDG extends DBAO{
         return $result;
     }
 
-    public function ajouterUsager($email, $username, $password,$idImage){
-        try{
+    public function ajouterUsager($email, $username, $password,$idImage = 1){
+       
             $conn = $this->connect();
+
             $tableName = $this->tableName;
-            $query = "INSERT INTO $tableName (Email, Username, Password,idImage) VALUES (:email, :username, :password,:idimage)";
+
+            $query = "INSERT INTO $tableName (Email, Username, Password,idImage) VALUES (:email, :username, :password,:idImage)";
+
             $stmt = $conn->prepare($query);
+
             $stmt->bindParam(':email', $email);
+
             $stmt->bindParam(':username', $username);
+
             $stmt->bindParam(':password', $password);
+
             $stmt->bindParam(':idImage', $idImage);
+
             $stmt->execute();
+
             $resp =  true;
-        }
-        catch(PDOException $e)
-        {
-            $resp =  false;
-        }
+       
+      
+        
+        
         //fermeture de connection PDO
         $conn = null;
         return $resp;
