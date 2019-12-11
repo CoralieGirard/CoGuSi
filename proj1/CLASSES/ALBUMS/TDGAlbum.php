@@ -23,6 +23,15 @@
 
         }
 
+    public static function getInstance()
+    {
+        if(self::$instance == null)
+        {
+            self::$instance = new AlbumTDG();
+        }
+        return self::$instance;
+    }
+
         
  
         public function createTable(){
@@ -50,8 +59,6 @@
             //fermeture de connection PDO
             $conn = null;
             return $resp;
-
-
         }
         
       
@@ -113,10 +120,4 @@
             return $result;
         }
     }
-
-        
-
-
-
-
 ?>

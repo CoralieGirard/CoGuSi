@@ -2,7 +2,7 @@
 
 /**
  * Album.php
- * Fait par Guillaume Gauvin
+ * Fait par Guillaume Gauvin et Simon Daudelin
  * Include un objet representant un Album  */ 
 
 
@@ -18,10 +18,10 @@
         private $description;
         private $proprietaire;
         private $dateCreation;
-        private $images;
+        private $albums;
 
         public function __construct(){
-            $this->images = array();
+            $this->albums = array();
         }
 
 
@@ -41,8 +41,8 @@
             return $this->proprietaire;
         }
 
-        public function getImages(){
-            return $this->images;
+        public function getalbums(){
+            return $this->albums;
         }
 
         public function loadAlbumAvecID($id){
@@ -60,8 +60,8 @@
             $this->dateCreation  = $res["DateCreation"];
             /*
 
-                Devras etre fait une fois que Image est faite
-            $this->images  = $res["idAlbum"];
+                Devras etre fait une fois que album est faite
+            $this->albums  = $res["idAlbum"];
             */
 
         }
@@ -69,19 +69,40 @@
         /**
          * En cours, cette fonction cree Du HTML
          * Entete avec le nom de album et le proprio
-         * Body est avec les images
+         * Body est avec les albums
          * footer est la date de creation
          * 
          * IN PROGRESS (faut faire du Css pour donner les bonnes classes n shit )
          */
 
         public function toTable(){
-
+            
         }
 
+        private static function listAllAlbums(){
+            $TDG = AlbumTDG::getInstance();
+            $res = $TDG->getAllAlbums();
+            $TDG = null;
+            if(!$res)
+            {
+              return $res;
+            }
+            return $res;
+        }
+
+        public static function createAlbumList(){
+            $TDGRes = Album::listAllAlbums();
+            $albumsList = array();
+            foreach($TDGRes as $r){
+                $album = new Album();
+                $album->setIdalbum($r["idAlbum"]);
+                $album->setURL($r["URL"]);
+                $album->setIdAlbum($r["idAlbum"]);
+                $album->setDescription($r["Description"]);
+                $album->setDateCreation($r["DateCreation"]);
+                array_push($albumsList, $album);
+            }
+            return $albumsList;
+        }
     }
-
-
-
-
 ?>
