@@ -3,7 +3,7 @@
 /**
  * 
  * TDGAlbum.php
- * Créer par Guillaume Gauvin
+ * * Fait par Guillaume Gauvin et Simon Daudelin
  * Crée une classe pouvant accèder à la base de données
  */
 
@@ -118,6 +118,30 @@
             //fermeture de connection PDO
             $conn = null;
             return $result;
+        }
+
+        public function addAlbum($titre, $description, $dateCreation){
+
+            try{
+                $conn = $this->connect();
+                $tableName = $this->tableName;
+
+                $query = "INSERT INTO $tableName (Titre, Proprietaire, Description, DateCreation, likes) VALUES (:titre, :proprio, :description, :date, 0)";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':titre', $titre);
+                $stmt->bindParam(':proprio', $_SESSION["idUser"];
+                $stmt->bindParam(':description', $description);
+                $stmt->bindParam(':date', $DateCreation);
+                $stmt->execute();
+                $res = true;
+            }
+            catch(PDOException $e)
+            {
+                $res = false;
+            }
+            //fermeture de connection PDO
+            $conn = null;
+            return $res;
         }
     }
 ?>

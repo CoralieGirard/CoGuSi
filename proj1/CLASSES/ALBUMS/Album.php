@@ -9,8 +9,7 @@
     include_once __DIR__."/TDGAlbum.php";
 
 
-
-    
+    date_default_timezone_set("America/New_York");
     class Album {
 
         private $id;
@@ -103,6 +102,18 @@
                 array_push($albumsList, $album);
             }
             return $albumsList;
+        }
+
+        public function addAlbum($titre,$description){
+            $TDG = ImagesTDG::getInstance();
+            $dateCreation = date("Y-m-d H:i:s");
+            $res = $TDG->addImage($titre, $description, $dateCreation);
+            $TDG = null;
+            if(!$res)
+            {
+                return $res;
+            }
+            return $res;
         }
     }
 ?>
