@@ -37,7 +37,7 @@
                 echo $navLinks;
             ?>
             <li class="nav-item">
-                <a class="nav-link" href="billboard.php">My album</a>
+                <a class="nav-link" href="billboard.php">MY ALBUMS</a>
             </li>
         </ul>
 
