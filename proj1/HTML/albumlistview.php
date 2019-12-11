@@ -1,18 +1,18 @@
 <?php
     include "CLASSES/ALBUMS/Album.php";
-    $thread_list = Thread::createAlbumList();
+    $album_list = Album::createAlbumList();
 ?>
 
-<h3 class="my-4">Threads</h3>
+<h3 class="my-4">My albums</h3>
 <?php
-  foreach($thread_list as $thread){
-    $thread->displayAlbum();
+  foreach($album_list as $album){
+    $album->displayAlbum();
   }
   echo "<h3 class=\"my-4\">Top 5</h3>";
   var_dump($_COOKIE);
 
   arsort($_COOKIE);
-  $thread = new Album();
+  $album = new Album();
   $compteur = 0;
 
   foreach($_COOKIE as $cookie=>$value)
@@ -23,8 +23,8 @@
     }
     else if($compteur != 6)
     {
-      $thread->loadAlbumById($cookie);
-      $thread->displayAhread();
+      $album->loadAlbumById($cookie);
+      $album->displayAlbum();
       $compteur++;
     }
   }
