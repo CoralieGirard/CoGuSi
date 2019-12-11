@@ -39,6 +39,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="billboard.php">MY ALBUMS</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="billboard.php">ALL ALBUMS</a>
+                </li>
            
         </ul>
 
