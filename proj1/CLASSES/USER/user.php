@@ -124,14 +124,16 @@
                 return false;
             }
 
-            if(!$this->validationEmailDisponible($email))
-            {
+            if(!$this->validationEmailDisponible($email)){
                 return false;
             }
 
             $TDG = UserTDG::getInstance();
+
             $res = $TDG->ajouterUsager($email, $username, password_hash($pw, PASSWORD_DEFAULT));
+
             $TDG = null;
+            
             return $res;
 
         }
