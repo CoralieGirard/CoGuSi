@@ -39,6 +39,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="billboard.php">MY ALBUMS</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="billboard.php">ALL ALBUMS</a>
         </ul>
 
         <form class="form-inline my-2 my-lg-0" action="search.php">
