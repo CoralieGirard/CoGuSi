@@ -24,7 +24,7 @@
 
 <div class="jumbotron text-center" style="margin-bottom:0">
     <div class="container">
-        <h1>apache helicopter 31</h1>
+        <h1>Apache helicopter 31</h1>
         <p>Cause memes are life</p>
     </div>
 </div>
