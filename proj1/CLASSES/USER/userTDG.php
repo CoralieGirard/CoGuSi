@@ -149,7 +149,7 @@ class UserTDG extends DBAO{
         return $result;
     }
 
-    public function ajouterUsager($email, $username, $password,$idImage = 1){
+    public function ajouterUsager($email, $username, $password,$idImage){
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;

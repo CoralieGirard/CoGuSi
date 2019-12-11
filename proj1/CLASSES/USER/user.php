@@ -124,7 +124,8 @@
                 return false;
             }
 
-            if(!$this->validationEmailDisponible($email)){
+            if(!$this->validationEmailDisponible($email))
+            {
                 return false;
             }
 
