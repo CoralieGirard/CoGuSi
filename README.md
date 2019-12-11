@@ -19,3 +19,6 @@ CONSTRAINT idAlbum_fk FOREIGN KEY (idAlbum) REFERENCES Album(idAlbum)
 CREATE TABLE IF NOT EXISTS Commentaire ( idCommentaire INTEGER(10) AUTO_INCREMENT PRIMARY KEY, Proprietaire INT, idType INT, Type VARCHAR(30), DateCreation VARCHAR(30), Contenu LONGTEXT,  likes INT,
 
 CONSTRAINT Proprietaire_fk FOREIGN KEY (Proprietaire) REFERENCES Usager(idUser) );
+
+INSERT INTO `image` (`idImage`, `URL`, `idAlbum`, `Description`, `DateCreation`, `likes`) VALUES
+(1, '.\\images\\profile-2398782_960_720.jpg', NULL, NULL, NULL, 0);
