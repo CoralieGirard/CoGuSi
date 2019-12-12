@@ -119,6 +119,26 @@
             $conn = null;
             return $result;
         }
+        
+        public function getAlbumByName($motSearch){
+            try{
+                $conn = $this->connect();
+                $tableName = $this->tableName;
+                $query = "SELECT * FROM $tableName WHERE Titre Like :motSearch";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':Titre', '%'.$motSearch.'%');
+                $stmt->execute();
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $result = $stmt->fetch();
+            }
+            catch(PDOException $e)
+            {
+                echo "Error: " . $e->getMessage();
+            }
+            //fermeture de connection PDO
+            $conn = null;
+            return $result;
+        }
 
         public function addAlbum($titre, $description, $dateCreation){
 
