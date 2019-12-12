@@ -137,6 +137,7 @@ class Images{
         }
         return $res;
     }
+
     public static function createImageList(){
         $TDGRes = Images::listAllImages();
         $imagesList = array();
@@ -156,6 +157,13 @@ class Images{
         $TDG = ImagesTDG::getInstance();
         $res = $TDG->getByIdImage($idImage);
         return $res["URL"];
+    }
+
+    public static function getIDByURL($URL)
+    {
+        $TDG = ImagesTDG::getInstance();
+        $res = $TDG->getByURL($URL);
+        return $res["idImage"];
     }
 }
 
