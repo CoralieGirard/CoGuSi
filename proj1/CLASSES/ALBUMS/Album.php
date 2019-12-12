@@ -155,8 +155,10 @@
         {
             $titre = $this->titre;
             $id = $this->id;
+            $description = $this->description;
             echo "<div class='card bg-dark mb-4'>";
-            echo "<div class='card-header text-left '><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
+            echo "<div class='card-header text-left'><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
+            echo "<br><div class='my-3 p-3 bg-white rounded shadow-sm'><h5>Description</h5><br>$description</div>";
             echo "</div>";
             echo "</div>";
         }
@@ -165,11 +167,13 @@
         {
             $titre = $this->titre;
             $id = $this->id;
+            $description = $this->description;
             echo "<div class='card bg-dark mb-4'>";
-            echo "<div class='card-header text-left '><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
+            echo "<div class='card-header text-left '><div class='d-flex justify-content-between align-items-center w-100'><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
             echo "<form method = 'post' action = 'DOMAINLOGIC/deleteAlbum.dom.php'>";
+            echo "<button class='btn btn-danger mb-2' type='submit'>Delete album</button></div>";
             echo "<input type='hidden' name='idCommentaire' value='$id'>";
-            echo "<button class='btn btn-danger mb-2' type='submit'>Delete album</button>";
+            echo "<br><div class='my-3 p-3 bg-white rounded shadow-sm'><h5>Description</h5><br>$description</div>";
             echo "</form>";
             echo "</div>";
             echo "</div>";
