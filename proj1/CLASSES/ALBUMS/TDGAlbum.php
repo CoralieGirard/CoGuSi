@@ -143,5 +143,44 @@
             $conn = null;
             return $res;
         }
+        
+        public function deleteAlbum($idAlbum){
+            try{
+                $conn = $this->connect();
+                $tableName = $this->tableName;
+                $query = "DELETE FROM $tableName WHERE idAlbum=:idAlbum";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':idAlbum', $idAlbum);
+                $stmt->execute();
+                $resp = true;
+            }
+    
+            catch(PDOException $e)
+            {
+                $resp = false;
+            }
+            //fermeture de connection PDO
+            $conn = null;
+            return $resp;
+        }
+
+        public function getAlbumByUserId($id){
+            try{
+                $conn = $this->connect();
+                $query = "SELECT * FROM ". $this->tableName ." WHERE Proprietaire=:id";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':id', $id);
+                $stmt->execute();
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $result = $stmt->fetch();
+            }
+            catch(PDOException $e)
+            {
+                return false;
+            }
+            //fermeture de connection PDO
+            $conn = null;
+            return $result;
+        }
     }
 ?>
