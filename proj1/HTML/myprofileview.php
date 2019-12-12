@@ -1,7 +1,7 @@
 <div class="container" style="margin-top:30px">
   <h1>My Profile</h1>
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-4">
 
 
           <div class="container align-middle border mb-sm-5">
@@ -57,10 +57,11 @@
             </form>
           </div>
           <div class="container align-middle border mb-sm-5">
-          <form method = "post" action = "">
+
+          <form method = "post" action = "./DOMAINLOGIC/updateProfileImage.php" enctype="multipart/form-data">
           <div class="form-group">
                   <label for="Fichier">new password validation:</label>
-                  <input type="file" class="form-control" name="Fichier" id="media" required>
+                  <input type="file" class="form-control" name="Fichier" id="Fichier" required>
                   <br>
               </div>
           <img src=
@@ -74,6 +75,7 @@
             echo $ImageURL;
           ?> 
           />
+          <button class="btn btn-success mb-sm-3" type="submit">Change Image</button>
           </form>
           </div>
     </div>
