@@ -129,6 +129,26 @@ class UserTDG extends DBAO{
         $conn = null;
         return $result;
     }
+    
+    public function getUsernameByName($motSearch){
+        try{
+            $conn = $this->connect();
+            $tableName = $this->tableName;
+            $query = "SELECT * FROM $tableName WHERE Username Like :motSearch";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':Username', '%'.$motSearch.'%');
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch();
+        }
+        catch(PDOException $e)
+        {
+            echo "Error: " . $e->getMessage();
+        }
+        //fermeture de connection PDO
+        $conn = null;
+        return $result;
+    }
 
     public function getAllUsager(){
         try{
