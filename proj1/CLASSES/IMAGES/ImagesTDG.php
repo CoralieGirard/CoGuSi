@@ -112,6 +112,26 @@ class ImagesTDG extends DBAO{
         $conn = null;
         return $result;
     }
+    
+    public function getImageByName($motSearch){
+        try{
+            $conn = $this->connect();
+            $tableName = $this->tableName;
+            $query = "SELECT * FROM $tableName WHERE Description Like :motSearch";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':Description', '%'.$motSearch.'%');
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch();
+        }
+        catch(PDOException $e)
+        {
+            echo "Error: " . $e->getMessage();
+        }
+        //fermeture de connection PDO
+        $conn = null;
+        return $result;
+    }
 
     public function getByIdAlbum($idAlbum){
 
