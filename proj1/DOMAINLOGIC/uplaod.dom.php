@@ -2,13 +2,13 @@
 
 include __DIR__ . "/../CLASSES/IMAGES/Images.php";
 
-if(isset($_FILES['Image']) && !empty($_POST['Description'])){
+if(isset($_FILES['Image'])){
  
     $Description = $_POST['Description'];
     $target_dir = "Images/";
 
     //obtenir l'extention du fichier uploader
-    $media_file_type = pathinfo($_FILES['Image'],PATHINFO_EXTENSION);
+    $media_file_type = pathinfo($_FILES['Image']['name'],PATHINFO_EXTENSION);
   
     // Valid file extensions
     $img_extensions_arr = array("jpg","jpeg","png","gif");
