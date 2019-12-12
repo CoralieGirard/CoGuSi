@@ -200,11 +200,12 @@
             return $res;
         }
 
-        public function updateUserImage($email,$urlImage){
+        public function updateUserImage($email,$idImage){
             $TDG = UserTDG::getInstance();
-            $res = $TDG->updatePassword($NHP, $this->id);
-            $this->password = $NHP;
+            $this->loadUser($email);
+            $res = $TDG->updateImage($idImage,$this->id);
             $TDG = null;
+            return $res;
         }
 
         public  function getByID($id){
