@@ -221,7 +221,6 @@ class UserTDG extends DBAO{
         return $resp;
     }
 
-   
     public function updateImage($image,$id){
         try{
         $conn = $this->connect();
@@ -242,5 +241,6 @@ class UserTDG extends DBAO{
         return $resp;
 
     }
+}
 
 ?>
