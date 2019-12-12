@@ -221,11 +221,12 @@ class UserTDG extends DBAO{
         return $resp;
     }
 
+   
     public function updateImage($image,$id){
         try{
         $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "UPDATE $tableName SET Image=:image WHERE idUser=:id";
+            $query = "UPDATE $tableName SET idImage=:image WHERE idUser=:id";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':image', $image);
             $stmt->bindParam(':id', $id);
@@ -241,6 +242,5 @@ class UserTDG extends DBAO{
         return $resp;
 
     }
-}
 
 ?>
