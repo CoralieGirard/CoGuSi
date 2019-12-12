@@ -9,7 +9,8 @@
       die();
     }
 
-    $title = $_POST["albumcreation"];////////////////////////////////////////////
+    $title = $_POST["titre"];
+    $description = $_POST["description"];
 
     if(empty("$title")){
       header("Location: ../error.php?ErrorMSG=bad%20request!");
@@ -17,12 +18,11 @@
     }
 
     $album = new Album();
-    if(!$album->addAlbum()){////////////////////////////////////////////
+    if(!$album->addAlbum($title, $description)){
       header("Location: ../error.php?ErrorMSG=Bad%20request!");
       die();
     }
 
-    $album->loadAlbum();//////////////////////////////
     $idAlbum = $album->getId();
     header("Location: ../displayalbum.php?idAlbum=$idAlbum&albumTitle=$title");
     die();
