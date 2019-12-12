@@ -23,13 +23,14 @@
             $this->albums = array();
         }
 
+        //get
 
         public function getId(){
             return $this->id;
         }
     
-        public function getTitle(){
-            return $this->title;
+        public function getTitre(){
+            return $this->titre;
         }
         
         public function getDescription(){
@@ -44,11 +45,30 @@
             return $this->albums;
         }
 
+        //set
+        public function setIdAlbum($id){
+            $this->id = $id;
+        }
+    
+        public function setTitre($titre){
+            $this->titre = $titre;
+        }
+        
+        public function setDescription($description){
+            $this->description = $description;
+        }
+
+        public function setProprietaires($proprio){
+            $this->proprietaire = $proprio;
+        }
+
+        //
+
         public function loadAlbumAvecID($id){
             $TDG = new TDGAlbum();
             $res = $TDG->getbyId($id);
 
-            if(!res){
+            if(!$res){
                 return false;
             }
 
@@ -81,7 +101,7 @@
         public function getAlbumByUserId($id){
             $TDG = new TDGAlbum();
             $res = $TDG->getAlbumByUserId($id); 
-            if(!res){
+            if(!$res){
                 return false;
             }
             return $res;
@@ -104,19 +124,18 @@
             foreach($TDGRes as $r){
                 $album = new Album();
                 $album->setIdalbum($r["idAlbum"]);
-                $album->setURL($r["URL"]);
-                $album->setIdAlbum($r["idAlbum"]);
+                $album->setTitre($r["Titre"]);
                 $album->setDescription($r["Description"]);
-                $album->setDateCreation($r["DateCreation"]);
+                $album->setProprietaires($r["Proprietaire"]);
                 array_push($albumsList, $album);
             }
             return $albumsList;
         }
 
         public function addAlbum($titre,$description){
-            $TDG = ImagesTDG::getInstance();
+            $TDG = TDGAlbum::getInstance();
             $dateCreation = date("Y-m-d H:i:s");
-            $res = $TDG->addImage($titre, $description, $dateCreation);
+            $res = $TDG->addAlbum($titre, $description, $dateCreation);
             $TDG = null;
             if(!$res)
             {
@@ -130,6 +149,30 @@
             $res = $TDG->deleteAlbum($this->idAlbum);
             $TDG = null;
             return $res;
+        }
+
+        public function displayAlbum()
+        {
+            $titre = $this->titre;
+            $id = $this->id;
+            echo "<div class='card bg-dark mb-4'>";
+            echo "<div class='card-header text-left '><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
+            echo "</div>";
+            echo "</div>";
+        }
+
+        public function displayMyAlbum()
+        {
+            $titre = $this->titre;
+            $id = $this->id;
+            echo "<div class='card bg-dark mb-4'>";
+            echo "<div class='card-header text-left '><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
+            echo "<form method = 'post' action = 'DOMAINLOGIC/deleteAlbum.dom.php'>";
+            echo "<input type='hidden' name='idCommentaire' value='$id'>";
+            echo "<button class='btn btn-danger mb-2' type='submit'>Delete album</button>";
+            echo "</form>";
+            echo "</div>";
+            echo "</div>";
         }
     }
 ?>
