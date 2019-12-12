@@ -77,6 +77,15 @@
         public function toTable(){
             
         }
+        
+        public function getAlbumByUserId($id){
+            $TDG = new TDGAlbum();
+            $res = $TDG->getAlbumByUserId($id); 
+            if(!res){
+                return false;
+            }
+            return $res;
+        }
 
         private static function listAllAlbums(){
             $TDG = TDGAlbum::getInstance();
@@ -113,6 +122,13 @@
             {
                 return $res;
             }
+            return $res;
+        }
+        
+        public function delete(){
+            $TDG = TDGAlbum::getInstance();
+            $res = $TDG->deleteAlbum($this->idAlbum);
+            $TDG = null;
             return $res;
         }
     }
