@@ -53,9 +53,16 @@
               </div>
 
               <button class="btn btn-success mb-sm-3" type="submit">Change Password</button>
+            
             </form>
           </div>
           <div class="container align-middle border mb-sm-5">
+          <form method = "post" action = "">
+          <div class="form-group">
+                  <label for="Fichier">new password validation:</label>
+                  <input type="file" class="form-control" name="Fichier" id="media" required>
+                  <br>
+              </div>
           <img src=
           <?php
             include_once __DIR__."/../CLASSES\\USER\\user.php";
@@ -67,6 +74,7 @@
             echo $ImageURL;
           ?> 
           />
+          </form>
           </div>
     </div>
 </div>
