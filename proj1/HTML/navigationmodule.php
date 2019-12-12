@@ -8,6 +8,9 @@
         <li class="nav-item">
             <a class="nav-link" href="myProfile.php">MY PROFILE</a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link" href="myAlbum.php">MY ALBUMS</a>
+        </li>
         ';
     }
     else{
@@ -36,9 +39,6 @@
             <?php
                 echo $navLinks;
             ?>
-            <li class="nav-item">
-                <a class="nav-link" href="myAlbum.php">MY ALBUMS</a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="billboard.php">ALL ALBUMS</a>
                 </li>
