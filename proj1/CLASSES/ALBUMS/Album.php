@@ -79,7 +79,7 @@
         }
 
         private static function listAllAlbums(){
-            $TDG = AlbumTDG::getInstance();
+            $TDG = TDGAlbum::getInstance();
             $res = $TDG->getAllAlbums();
             $TDG = null;
             if(!$res)
