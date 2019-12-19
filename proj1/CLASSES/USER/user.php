@@ -230,6 +230,26 @@
             echo "</div>";
             echo "</div>";
         }
+        
+        public static function getByName($name)
+        {
+            $TDG = UserTDG::getInstance();
+            $res = $TDG->getUsernameByName($name);
+            $res = User::arrayToObject($res);
+            return $res;
+        }
+
+        public static function arrayToObject($list){
+            $newArray = [];
+            foreach($list as $obj){
+                $temp = new user();
+                $temp->setEmail($obj["Email"]);
+                $temp->setUsername($obj["Username"]);
+                $temp->setPassword($obj["Password"]);
+                array_push($newArray, $temp);
+            }
+            return $newArray;
+        }
 
     }
 ?>
