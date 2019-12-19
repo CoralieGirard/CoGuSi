@@ -38,7 +38,7 @@
             return $this->description;
         }
 
-        public function getProprietaires(){
+        public function getProprietaire(){
             return $this->proprietaire;
         }
 
@@ -108,17 +108,6 @@
             return $res;
         }
 
-        private static function listAlbumsById($proprietaire){
-            $TDG = TDGAlbum::getInstance();
-            $res = $TDG->getAlbumByUserId($proprietaire);
-            $TDG = null;
-            if(!$res)
-            {
-              return $res;
-            }
-            return $res;
-        }
-
         public static function createAlbumList(){
             $TDGRes = Album::listAllAlbums();
             $albumsList = array();
@@ -135,7 +124,8 @@
         }
 
         public static function createAlbumListByProprietaire($proprietaire){
-            $TDGRes = Album::listAlbumsById($proprietaire);
+            $album = new Album();
+            $TDGRes = $album->getAlbumByUserId($proprietaire);
             $albumsList = array();
             foreach($TDGRes as $r){
                 $album = new Album();
@@ -158,6 +148,14 @@
             {
                 return $res;
             }
+            return $res;
+        }
+
+        public function getNewAlbumId($titre,$description)
+        {
+            $TDG = TDGAlbum::getInstance();
+            $res = $TDG->;
+            $TDG = null;
             return $res;
         }
         
@@ -191,9 +189,8 @@
             $date = $this->dateCreation;
             echo "<div class='card bg-dark mb-4'>";
             echo "<div class='card-header text-left '><div class='d-flex justify-content-between align-items-center w-100'><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
-            echo "<form method = 'post' action = 'DOMAINLOGIC/deleteAlbum.dom.php'>";
+            echo "<form method = 'post' action = 'DOMAINLOGIC/deleteAlbum.dom.php?idAlbum=$id'>";
             echo "<button class='btn btn-danger mb-2' type='submit'>Delete album</button></div>";
-            echo "<input type='hidden' name='idCommentaire' value='$id'>";
             echo "<br><div class='my-3 p-3 bg-white rounded shadow-sm'><h5>Description</h5><br>$description</div>";
             echo "</form>";
             echo "</div>";
