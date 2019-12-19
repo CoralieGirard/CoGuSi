@@ -9,6 +9,8 @@
   $title=$_GET["albumTitre"];
   $id = $_GET["idAlbum"];
 
+  $_SESSION["idAlbum"] = $id;
+
   if(isset($_COOKIE["$id"]))
   {
     setcookie("$id", ++$_COOKIE["$id"], time()+ (3600*24*365));
@@ -19,7 +21,12 @@
   }
 
   $content = array();
-  array_push($content, "/../displayImage.php");
+  
+
+
+  array_push($content,"/../displayImage.php");
+
+  
   array_push($content, "commentairecreateview.php");
 
   require_once __DIR__ . "/HTML/masterpage.php";

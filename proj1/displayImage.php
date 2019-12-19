@@ -26,7 +26,7 @@
             if(isset($_GET["idImage"]))
             {
                 $image_arr=array();
-                $image = new Image();
+                $image = new Images();
                 $image->loadImageById($_GET["idImage"]);
                 array_push($image_arr,$image);
 
