@@ -142,7 +142,7 @@ class ImagesTDG extends DBAO{
             $stmt->bindParam(':idAlbum', $idAlbum);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetch();
+            $result = $stmt->fetchall();
         }
 
         catch(PDOException $e)

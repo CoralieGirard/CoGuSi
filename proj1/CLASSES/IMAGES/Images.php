@@ -82,6 +82,7 @@ class Images{
         $this->likes = $res["likes"];
         return true;
     }
+
     public function loadImageByDateCreation($date){
         $TDG = ImagesTDG::getInstance();
         $res = $TDG->getByDateCreation($date);
@@ -96,6 +97,7 @@ class Images{
         $this->likes = $res["likes"];
         return true;
     }
+
     public function addImage($URL, $idAlbum, $description){
         $TDG = ImagesTDG::getInstance();
         $dateCreation = date("Y-m-d H:i:s");
@@ -107,14 +109,21 @@ class Images{
         }
         return $res;
     }
+
     public function displayImage(){
-        $idImage = $this->idImage;;
+
+        $idImage = $this->idImage;
+
         $URL = $this->URL;
+
         $idAlbum = $this->idAlbum;
+
         $Description = $this->Description;
+
         $DateCreation = $this->DateCreation;
+
         $likes = $this->likes;
-        include __DIR__ . "/../HTML/templateImage.php";
+        include __DIR__ . "/../../HTML/templateImage.php";
     }
     /*
     Post related functions
@@ -124,9 +133,11 @@ class Images{
     {
         return ImagesTDG::getInstance().getLikes();
     }
+
     /*
     STATIC FUNCTIONS
     */
+
     private static function listAllImages(){
         $TDG = ImagesTDG::getInstance();
         $res = $TDG->getAllImages();
@@ -152,6 +163,27 @@ class Images{
         }
         return $imagesList;
     }
+
+    public static function listImagesByIdAlbum($idAlbum){
+
+        $TDG=ImagesTDG::getInstance();
+        $TDGRes = $TDG->getByIdAlbum($idAlbum);
+
+        $imagesList = array();
+
+        foreach($TDGRes as $r){
+            $image = new Images();
+            $image->setIdImage($r["idImage"]);
+            $image->setURL($r["URL"]);
+            $image->setIdAlbum($r["idAlbum"]);
+            $image->setDescription($r["Description"]);
+            $image->setDateCreation($r["DateCreation"]);
+            array_push($imagesList, $image);
+        }
+
+        return $imagesList;
+    }
+
     public static function getURLById($idImage)
     {
         $TDG = ImagesTDG::getInstance();
@@ -165,6 +197,8 @@ class Images{
         $res = $TDG->getByURL($URL);
         return $res["idImage"];
     }
+
+ 
 }
 
  
