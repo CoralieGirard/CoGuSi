@@ -144,7 +144,6 @@
             $TDGRes = $album->getAlbumByUserId($proprietaire);
             $albumsList = array();
             foreach($TDGRes as $r){
-                $album = new Album();
                 $album->setIdAlbum($r["idAlbum"]);
                 $album->setTitre($r["Titre"]);
                 $album->setDescription($r["Description"]);
