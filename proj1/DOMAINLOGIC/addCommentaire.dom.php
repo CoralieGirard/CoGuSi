@@ -28,6 +28,7 @@
       die();
     }
 
+    header("Location: ../ImageCommentaire.php?idImage=".$Type."&Type=".$idType);
 
     die();
 
