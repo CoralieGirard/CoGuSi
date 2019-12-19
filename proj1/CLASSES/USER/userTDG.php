@@ -74,9 +74,9 @@ class UserTDG extends DBAO{
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "SELECT idUser, Email, Username, Image FROM $tableName WHERE idUser=:id";
+            $query = "SELECT * FROM $tableName WHERE idUser=:id";
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':idUser', $id);
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetch();

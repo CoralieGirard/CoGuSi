@@ -208,14 +208,7 @@
             return $res;
         }
 
-        public  function getByID($id){
-
-            if(!$this->loadUser($email))
-            {
-              return false;
-            }
-    
-
+        public static function getByID($id){
             $TDG = UserTDG::getInstance();
             $res = $TDG->getById($id);
             $TDG = null;
