@@ -214,6 +214,13 @@
             $TDG = null;
             return $res["Username"];
         }
+        
+        public static function getByName($name)
+        {
+            $TDG = UserTDG::getInstance();
+            $res = $TDG->getUsernameByName($name);
+            return $res;
+        }
 
         
     }
