@@ -169,7 +169,7 @@
         
         public function delete(){
             $TDG = TDGAlbum::getInstance();
-            $res = $TDG->deleteAlbum($this->idAlbum);
+            $res = $TDG->deleteAlbum($this->id);
             $TDG = null;
             return $res;
         }
