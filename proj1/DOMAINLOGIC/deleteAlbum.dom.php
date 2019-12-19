@@ -22,6 +22,7 @@
         die();
     }
     
+    Images::deleteImageByIdAlbum($_GET["idAlbum"]);
     $album->delete();
 
     header("Location: ../billboard.php");
