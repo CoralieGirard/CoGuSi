@@ -19,9 +19,23 @@
     </head>
     <body>
         <?php
-            $image_arr = Images::listAllImages();
+
+            if(isset($_GET["idAlbum"]))
+            $image_arr = Images::listImagesByIdAlbum($_GET["idAlbum"]);
+
+            if(isset($_GET["idImage"]))
+            {
+                $image_arr=array();
+                $image = new Image();
+                $image->loadImageById($_GET["idImage"]);
+                array_push($image_arr,$image);
+
+            }
+
             foreach($image_arr as $image){
+
                 $image->displayImage();
+
             }
         ?>
     </body>
