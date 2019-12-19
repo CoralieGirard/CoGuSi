@@ -104,12 +104,9 @@
             
         }
         
-        public function getAlbumByUserId($id){
+        public static function getAlbumByUserId($id){
             $TDG = new TDGAlbum();
             $res = $TDG->getAlbumByUserId($id); 
-            if(!$res){
-                return false;
-            }
             return $res;
         }
 
@@ -117,10 +114,6 @@
             $TDG = TDGAlbum::getInstance();
             $res = $TDG->getAllAlbums();
             $TDG = null;
-            if(!$res)
-            {
-              return $res;
-            }
             return $res;
         }
 
@@ -140,10 +133,10 @@
         }
 
         public static function createAlbumListByProprietaire($proprietaire){
-            $album = new Album();
-            $TDGRes = $album->getAlbumByUserId($proprietaire);
+            $TDGRes = Album::getAlbumByUserId($proprietaire);
             $albumsList = array();
             foreach($TDGRes as $r){
+                $album = new Album();
                 $album->setIdAlbum($r["idAlbum"]);
                 $album->setTitre($r["Titre"]);
                 $album->setDescription($r["Description"]);
