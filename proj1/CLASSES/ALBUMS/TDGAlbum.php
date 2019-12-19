@@ -192,7 +192,7 @@
                 $stmt->bindParam(':id', $id);
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                $result = $stmt->fetch();
+                $result = $stmt->fetchall();
             }
             catch(PDOException $e)
             {

@@ -118,12 +118,37 @@
             return $res;
         }
 
+        private static function listAlbumsById($proprietaire){
+            $TDG = TDGAlbum::getInstance();
+            $res = $TDG->getAlbumByUserId($proprietaire);
+            $TDG = null;
+            if(!$res)
+            {
+              return $res;
+            }
+            return $res;
+        }
+
         public static function createAlbumList(){
             $TDGRes = Album::listAllAlbums();
             $albumsList = array();
             foreach($TDGRes as $r){
                 $album = new Album();
-                $album->setIdalbum($r["idAlbum"]);
+                $album->setIdAlbum($r["idAlbum"]);
+                $album->setTitre($r["Titre"]);
+                $album->setDescription($r["Description"]);
+                $album->setProprietaires($r["Proprietaire"]);
+                array_push($albumsList, $album);
+            }
+            return $albumsList;
+        }
+
+        public static function createAlbumListById($proprietaire){
+            $TDGRes = Album::listAlbumsById($proprietaire);
+            $albumsList = array();
+            foreach($TDGRes as $r){
+                $album = new Album();
+                $album->setIdAlbum($r["idAlbum"]);
                 $album->setTitre($r["Titre"]);
                 $album->setDescription($r["Description"]);
                 $album->setProprietaires($r["Proprietaire"]);
