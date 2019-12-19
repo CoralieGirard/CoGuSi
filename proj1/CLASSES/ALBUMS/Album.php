@@ -211,5 +211,27 @@
             echo $date;
             echo "</div>";
         }
+        
+        public static function getByName($name)
+        {
+            $TDG = TDGAlbum::getInstance();
+            $res = $TDG->getAlbumByName($name);
+            $res = Album::arrayToObject($res);
+            return $res;
+        }
+
+        //function des array to object static
+        public static function arrayToObject($list){
+            $newArray = [];
+            foreach($list as $obj){
+                $temp = new Album();
+                $temp->setIdAlbum($obj["idAlbum"]);
+                $temp->setTitre($obj["Titre"]);
+                $temp->setDescription($obj["Description"]);
+                $temp->setProprietaires($obj["Proprietaire"]);
+                array_push($newArray, $temp);
+            }
+            return $newArray;
+        }
     }
 ?>
