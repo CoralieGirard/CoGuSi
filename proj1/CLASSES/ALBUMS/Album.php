@@ -7,6 +7,7 @@
 
 
     include_once __DIR__."/TDGAlbum.php";
+    include_once __DIR__."../../USER/user.php";
 
 
     date_default_timezone_set("America/New_York");
@@ -62,7 +63,10 @@
             $this->proprietaire = $proprio;
         }
 
-        //
+        public function setDateCreation($date){
+            $this->dateCreation = $date;
+        }
+
 
         public function loadAlbumAvecID($id){
             $TDG = new TDGAlbum();
@@ -77,22 +81,8 @@
             $this->description  = $res["Description"];
             $this->proprietaire  = $res["Proprietaire"];
             $this->dateCreation  = $res["DateCreation"];
-            /*
-
-                Devras etre fait une fois que album est faite
-            $this->albums  = $res["idAlbum"];
-            */
 
         }
-
-        /**
-         * En cours, cette fonction cree Du HTML
-         * Entete avec le nom de album et le proprio
-         * Body est avec les albums
-         * footer est la date de creation
-         * 
-         * IN PROGRESS (faut faire du Css pour donner les bonnes classes n shit )
-         */
 
         public function toTable(){
             
@@ -138,6 +128,7 @@
                 $album->setTitre($r["Titre"]);
                 $album->setDescription($r["Description"]);
                 $album->setProprietaires($r["Proprietaire"]);
+                $album->setDateCreation($r["DateCreation"]);
                 array_push($albumsList, $album);
             }
             return $albumsList;
@@ -152,6 +143,7 @@
                 $album->setTitre($r["Titre"]);
                 $album->setDescription($r["Description"]);
                 $album->setProprietaires($r["Proprietaire"]);
+                $album->setDateCreation($r["DateCreation"]);
                 array_push($albumsList, $album);
             }
             return $albumsList;
@@ -181,10 +173,13 @@
             $titre = $this->titre;
             $id = $this->id;
             $description = $this->description;
+            $date = $this->dateCreation;
+            $proprio = User::getById($this->proprietaire);
             echo "<div class='card bg-dark mb-4'>";
-            echo "<div class='card-header text-left'><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
+            echo "<div class='card-header text-left'><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a> By " . $proprio;
             echo "<br><div class='my-3 p-3 bg-white rounded shadow-sm'><h5>Description</h5><br>$description</div>";
             echo "</div>";
+            echo $date;
             echo "</div>";
         }
 
@@ -193,6 +188,7 @@
             $titre = $this->titre;
             $id = $this->id;
             $description = $this->description;
+            $date = $this->dateCreation;
             echo "<div class='card bg-dark mb-4'>";
             echo "<div class='card-header text-left '><div class='d-flex justify-content-between align-items-center w-100'><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
             echo "<form method = 'post' action = 'DOMAINLOGIC/deleteAlbum.dom.php'>";
@@ -201,6 +197,7 @@
             echo "<br><div class='my-3 p-3 bg-white rounded shadow-sm'><h5>Description</h5><br>$description</div>";
             echo "</form>";
             echo "</div>";
+            echo $date;
             echo "</div>";
         }
     }
