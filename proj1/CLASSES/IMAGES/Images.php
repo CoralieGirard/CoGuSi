@@ -197,8 +197,28 @@ class Images{
         $res = $TDG->getByURL($URL);
         return $res["idImage"];
     }
+    
+    public static function getByName($name)
+        {
+            $TDG = imagesTDG::getInstance();
+            $res = $TDG->getImageByName($name);
+            $res = Images::arrayToObject($res);
+            return $res;
+        }
 
- 
+        public static function arrayToObject($list){
+            $newArray = [];
+            foreach($list as $obj){
+                $temp = new Images();
+                $temp->setIdImage($obj["idImage"]);
+                $temp->setURL($obj["URL"]);
+                $temp->setIdAlbum($obj["idAlbum"]);
+                $temp->setDescription($obj["Description"]);
+                $temp->setDateCreation($obj["DateCreation"]);
+                array_push($newArray, $temp);
+            }
+            return $newArray;
+        }
 }
 
  
