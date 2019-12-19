@@ -1,6 +1,6 @@
 <?php
     include_once "CommentairesTDG.php";
-    include_once __DIR__ . "/../USER/User.php";
+    include_once __DIR__ . "/../USER/UserTDG.php";
     
     date_default_timezone_set("America/New_York");
 
@@ -94,7 +94,11 @@
             $DateCreation = $this->DateCreation;
             $Contenu = $this->Contenu;
             $Proprietaire = $this->Proprietaire;
-            include "HTML/commentairetemplate.php";
+            $TDG = userTDG::getInstance();
+            $User = $TDG->getbyId($Proprietaire);
+            $auteur = $User["Username"];
+
+            include __DIR__."/../../HTML/commentairetemplate.php";
         }
 
         public function loadCommentaire($idCommentaire){
@@ -123,13 +127,13 @@
             return $res;
         }
 
-        public static function createCommentaireList($idType){
+        public static function createCommentaireList($idType,$Type){
 
-            $infoArray=Commentaire::fetchCommentaireByType($idType);
+            $infoArray=Commentaires::fetchCommentaireByType($idType, $Type);
             $commentaireList = array();
 
             foreach($infoArray as $ia){
-                $tempCommentaire = new Commentaire();
+                $tempCommentaire = new Commentaires();
                 $tempCommentaire->setIdCommentaire($ia["idCommentaire"]);
                 $tempCommentaire->setProprietaire($ia["Proprietaire"]);
                 $tempCommentaire->setIdType($ia["idType"]);

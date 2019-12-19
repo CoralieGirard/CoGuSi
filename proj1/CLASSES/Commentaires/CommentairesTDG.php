@@ -2,6 +2,7 @@
 
 include_once __DIR__ . "/../../UTILS/connector.php";
 
+
 class commentaireTDG extends DBAO{
 
     private $tableName;
@@ -19,7 +20,7 @@ class commentaireTDG extends DBAO{
 
     public function __construct(){
         Parent::__construct();
-        $this->tableName = "Commentaire";
+        $this->tableName = "commentaire";
     }
 
     //create table
@@ -102,7 +103,7 @@ class commentaireTDG extends DBAO{
             $stmt->bindParam(':type', $Type);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetch();
+            $result = $stmt->fetchall();
         }
 
         catch(PDOException $e)
