@@ -23,7 +23,9 @@
       die();
     }
 
+    $album->loadAlbumByTitre($title);
     $idAlbum = $album->getId();
+
     header("Location: ../displayalbum.php?idAlbum=$idAlbum&albumTitle=$title");
     die();
 
