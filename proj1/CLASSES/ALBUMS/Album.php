@@ -143,7 +143,7 @@
             return $albumsList;
         }
 
-        public static function createAlbumListById($proprietaire){
+        public static function createAlbumListByProprietaire($proprietaire){
             $TDGRes = Album::listAlbumsById($proprietaire);
             $albumsList = array();
             foreach($TDGRes as $r){

@@ -149,9 +149,9 @@
                 $query = "INSERT INTO $tableName (Titre, Proprietaire, Description, DateCreation, likes) VALUES (:titre, :proprio, :description, :date, 0)";
                 $stmt = $conn->prepare($query);
                 $stmt->bindParam(':titre', $titre);
-                $stmt->bindParam(':proprio', $_SESSION["idUser"]);
+                $stmt->bindParam(':proprio', $_SESSION["userID"]);
                 $stmt->bindParam(':description', $description);
-                $stmt->bindParam(':date', $DateCreation);
+                $stmt->bindParam(':date', $dateCreation);
                 $stmt->execute();
                 $res = true;
             }
