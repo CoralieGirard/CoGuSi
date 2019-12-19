@@ -119,6 +119,25 @@
             $conn = null;
             return $result;
         }
+
+        public function getAlbumByTitre($titre){
+            try{
+                $conn = $this->connect();
+                $query = "SELECT * FROM ". $this->tableName ." WHERE Titre=:titre";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':titre', $titre);
+                $stmt->execute();
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $result = $stmt->fetch();
+            }
+            catch(PDOException $e)
+            {
+                return false;
+            }
+            //fermeture de connection PDO
+            $conn = null;
+            return $result;
+        }
         
         public function getAlbumByName($motSearch){
             try{
@@ -188,26 +207,6 @@
             try{
                 $conn = $this->connect();
                 $query = "SELECT * FROM ". $this->tableName ." WHERE Proprietaire=:id";
-                $stmt = $conn->prepare($query);
-                $stmt->bindParam(':id', $id);
-                $stmt->execute();
-                $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                $result = $stmt->fetchall();
-            }
-            catch(PDOException $e)
-            {
-                return false;
-            }
-            //fermeture de connection PDO
-            $conn = null;
-            return $result;
-        }
-
-        public function getNewAlbumId($titre, $description)
-        {
-            try{
-                $conn = $this->connect();
-                $query = "SELECT idAlbum FROM ". $this->tableName ." WHERE Titre=:id";
                 $stmt = $conn->prepare($query);
                 $stmt->bindParam(':id', $id);
                 $stmt->execute();

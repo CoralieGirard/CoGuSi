@@ -84,6 +84,22 @@
 
         }
 
+        public function loadAlbumByTitre($titre){
+            $TDG = new TDGAlbum();
+            $res = $TDG->getAlbumByTitre($titre);
+
+            if(!$res){
+                return false;
+            }
+
+            $this->id = $res["idAlbum"];
+            $this->titre  = $res["Titre"];
+            $this->description  = $res["Description"];
+            $this->proprietaire  = $res["Proprietaire"];
+            $this->dateCreation  = $res["DateCreation"];
+
+        }
+
         public function toTable(){
             
         }
@@ -148,14 +164,6 @@
             {
                 return $res;
             }
-            return $res;
-        }
-
-        public function getNewAlbumId($titre,$description)
-        {
-            $TDG = TDGAlbum::getInstance();
-            $res = $TDG->;
-            $TDG = null;
             return $res;
         }
         
