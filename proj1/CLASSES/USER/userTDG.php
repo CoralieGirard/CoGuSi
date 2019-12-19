@@ -139,7 +139,7 @@ class UserTDG extends DBAO{
             $stmt->bindParam(':Username', '%'.$motSearch.'%');
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetch();
+            $result = $stmt->fetchAll();
         }
         catch(PDOException $e)
         {
