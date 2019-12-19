@@ -4,7 +4,7 @@
         <div class="col-sm-8 mb-4">
             <?php 
             $id = $_GET["idUser"];
-            include "albumSearchListView.php?idUser=$id"; 
+            include __DIR__."/albumSearchListView.php"; 
             ?>
         </div>
     </div>

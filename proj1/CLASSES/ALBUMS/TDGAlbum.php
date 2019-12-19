@@ -145,10 +145,11 @@
                 $tableName = $this->tableName;
                 $query = "SELECT * FROM $tableName WHERE Titre Like :motSearch";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(':Titre', '%'.$motSearch.'%');
+                $rechercher = '%'.$motSearch.'%';
+                $stmt->bindParam(':motSearch', $rechercher);
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                $result = $stmt->fetch();
+                $result = $stmt->fetchall();
             }
             catch(PDOException $e)
             {

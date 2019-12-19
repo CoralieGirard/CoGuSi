@@ -125,14 +125,6 @@ class Images{
         $likes = $this->likes;
         include __DIR__ . "/../../HTML/templateImage.php";
     }
-    /*
-    Post related functions
-    */
- 
-    public function nbLikes()
-    {
-        return ImagesTDG::getInstance().getLikes();
-    }
 
     /*
     STATIC FUNCTIONS
@@ -207,7 +199,7 @@ class Images{
         }
 
         public static function arrayToObject($list){
-            $newArray = [];
+            $newArray = array();
             foreach($list as $obj){
                 $temp = new Images();
                 $temp->setIdImage($obj["idImage"]);

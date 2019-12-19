@@ -9,7 +9,7 @@
     $id = $_GET["idUser"];
     $username = $_GET["username"];
 
-    $module = "albumSearchview.php?idUser=$id&username=$username";
+    $module = "albumSearchview.php";
     array_push($content, $module);
 
     require_once __DIR__ . "/HTML/masterpage.php";

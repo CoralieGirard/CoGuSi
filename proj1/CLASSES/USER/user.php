@@ -49,6 +49,10 @@
 
 
         //set
+        public function setId($id){
+            $this->id = $id;
+        }
+
         public function setEmail($email){
             $this->email = $email;
         }
@@ -184,12 +188,6 @@
               return false;
             }
     
-            //verify password
-            if(!passwordVerify($oldpw, $this->password))
-            {
-                return false;
-            }
-    
             //create TDG and update to new hash
             $TDG = UserTDG::getInstance();
             $NHP = password_hash($pw, PASSWORD_DEFAULT);
@@ -214,19 +212,13 @@
             $TDG = null;
             return $res["Username"];
         }
-        
-        public static function getByName($name)
-        {
-            $TDG = UserTDG::getInstance();
-            $res = $TDG->getUsernameByName($name);
-            return $res;
-        }
 
         public function displayUser()
         {
+            $id = $this->id;
             $username = $this->username;
             echo "<div class='card bg-dark mb-4'>";
-            echo "<div class='card-header text-left'><a href='displayalbum.php'><h5>$username</h5></a>";
+            echo "<div class='card-header text-left'><a href='albumSearch.php?idUser=$id&username=$username'><h5>$username</h5></a>";
             echo "</div>";
             echo "</div>";
         }
@@ -243,6 +235,7 @@
             $newArray = [];
             foreach($list as $obj){
                 $temp = new user();
+                $temp->setId($obj["idUser"]);
                 $temp->setEmail($obj["Email"]);
                 $temp->setUsername($obj["Username"]);
                 $temp->setPassword($obj["Password"]);

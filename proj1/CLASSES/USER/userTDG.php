@@ -136,10 +136,11 @@ class UserTDG extends DBAO{
             $tableName = $this->tableName;
             $query = "SELECT * FROM $tableName WHERE Username Like :motSearch";
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':Username', '%'.$motSearch.'%');
+            $recherche = '%'.$motSearch.'%';
+            $stmt->bindParam(':motSearch', $recherche);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchall();
         }
         catch(PDOException $e)
         {
@@ -158,7 +159,7 @@ class UserTDG extends DBAO{
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchall();
         }
 
         catch(PDOException $e)

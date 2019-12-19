@@ -119,10 +119,11 @@ class ImagesTDG extends DBAO{
             $tableName = $this->tableName;
             $query = "SELECT * FROM $tableName WHERE Description Like :motSearch";
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':Description', '%'.$motSearch.'%');
+            $recherche = '%'.$motSearch.'%';
+            $stmt->bindParam(':motSearch', $recherche );
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetch();
+            $result = $stmt->fetchall();
         }
         catch(PDOException $e)
         {

@@ -25,7 +25,7 @@
 
 <h1 class="my-4">Search results (Images):</h1>
 <?php
- var_dump($imageList);
+ 
  foreach($imageList as $image){
     $image->displayImage();
   }
