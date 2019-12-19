@@ -197,5 +197,19 @@
             echo $date;
             echo "</div>";
         }
+
+        public function displayAlbumSearch()
+        {
+            $titre = $this->titre;
+            $id = $this->id;
+            $description = $this->description;
+            $date = $this->dateCreation;
+            echo "<div class='card bg-dark mb-4'>";
+            echo "<div class='card-header text-left'><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
+            echo "<br><div class='my-3 p-3 bg-white rounded shadow-sm'><h5>Description</h5><br>$description</div>";
+            echo "</div>";
+            echo $date;
+            echo "</div>";
+        }
     }
 ?>
