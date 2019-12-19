@@ -222,6 +222,14 @@
             return $res;
         }
 
-        
+        public function displayUser()
+        {
+            $username = $this->username;
+            echo "<div class='card bg-dark mb-4'>";
+            echo "<div class='card-header text-left'><a href='displayalbum.php'><h5>$username</h5></a>";
+            echo "</div>";
+            echo "</div>";
+        }
+
     }
 ?>
