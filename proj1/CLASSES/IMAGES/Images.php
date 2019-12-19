@@ -190,7 +190,7 @@ class Images{
         return $res["idImage"];
     }
     
-    public static function getByName($name)
+        public static function getByName($name)
         {
             $TDG = imagesTDG::getInstance();
             $res = $TDG->getImageByName($name);
@@ -210,6 +210,14 @@ class Images{
                 array_push($newArray, $temp);
             }
             return $newArray;
+        }
+
+        public static function deleteImageByIdAlbum($idAlbum)
+        {
+            $TDG = ImagesTDG::getInstance();
+            $res = $TDG->deleteImageByAlbum($idAlbum);
+            $TDG = null;
+            return $res;
         }
 }
 
