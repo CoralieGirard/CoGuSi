@@ -9,24 +9,26 @@
         die();
     }
 
-    if(!isset($_POST["Contenu"])){
-      header("Location: ../error.php?ErrorMSG=Bad%20Request");
+    if(!isset($_POST["contenu"])){
+      header("Location: ../error.php?ErrorMSG=Contenu%20Failed");
       die();
     }
 
-    $Contenu = $_POST["Contenu"];
+    $Contenu = $_POST["contenu"];
     $Proprietaire = $_SESSION["userID"];
-    $idType = $_GET["idType"];
-    $Type = $_GET["Type"];
+    $idType = $_POST["idType"];
+    $Type = $_POST["Type"];
 
     $commentaire = new Commentaires();
 
-    if(!$commentaire->addCommentaire($idType, $Type, $Contenu, $Proprietaire)){
-      header("Location: ../error.php?ErrorMSG=Bad%20Request");
+
+
+    if(!$commentaire->addCommentaire($Type, $idType, $Contenu, $Proprietaire)){
+      header("Location: ../error.php?ErrorMSG=Mission%20Failed%20".$idType."%20".$Type);
       die();
     }
 
-    header("Location: ../displayThread.php?threadID=$threadID&threadTitle=$threadTitle");/////////////////////////
+
     die();
 
  ?>
