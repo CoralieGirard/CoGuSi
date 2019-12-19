@@ -1,13 +1,13 @@
 <?php
   session_start();
 
-  if(!isset($_GET["albumTitle"])){
+  if(!isset($_GET["albumTitre"])){
     header("Location: error.php?ErrorMSG=Bad%20Request!");
     die();
   }
 
-  $title=$_GET["albumTitle"];
-  $id = $_GET["albumID"];
+  $title=$_GET["albumTitre"];
+  $id = $_GET["idAlbum"];
 
   if(isset($_COOKIE["$id"]))
   {
