@@ -7,7 +7,7 @@
  * Crée une classe pouvant accèder à la base de données
  */
 
-    include __DIR__."/../../UTILS/connector.php";
+    include_once __DIR__."/../../UTILS/connector.php";
 
 
     class TDGAlbum extends DBAO{
