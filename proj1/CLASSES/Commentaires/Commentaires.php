@@ -40,7 +40,7 @@
 
         //setters
         public function setIdCommentaire($idCommentaire){
-            $this->idCommenaire = $idCommentaire;
+            $this->idCommentaire = $idCommentaire; // Avait une erreur oof ici
         }
 
         public function setIdType($idType){
@@ -88,6 +88,7 @@
         }
 
         public function display(){
+
             $idCommentaire = $this->idCommentaire;
             $idType = $this->idType;
             $Type = $this->Type;
@@ -120,6 +121,9 @@
         /*
           static function used to create a list of posts
         */
+
+
+
         private static function fetchCommentaireByType($idType, $Type){
             $TDG = commentaireTDG::getInstance();
             $res = $TDG->getByIdType($idType, $Type);
@@ -144,6 +148,16 @@
             }
 
             return $commentaireList;
+        }
+
+        public static function deleteCommentairesByIDAndType($idType,$Type)
+        {
+            $Commentaires = Commentaires::createCommentaireList($idType,$Type);
+
+            foreach($Commentaires as $Commentaire)
+            {
+                $Commentaire->delete();
+            }
         }
 
     }

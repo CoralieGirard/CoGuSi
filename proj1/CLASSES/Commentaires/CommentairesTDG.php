@@ -76,7 +76,7 @@ class commentaireTDG extends DBAO{
 
         try{
             $conn = $this->connect();
-            $query = "SELECT * FROM ". $this->tableName ." WHERE idCommentaire=:idCommantaire";
+            $query = "SELECT * FROM ". $this->tableName ." WHERE idCommentaire=:idCommentaire";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':idCommentaire', $idCommentaire);
             $stmt->execute();
@@ -233,7 +233,7 @@ class commentaireTDG extends DBAO{
         try{
             $conn = $this->connect();
             $tableName = $this->tableName;
-            $query = "UPDATE $tableName SET Contenu=:contenu WHERE idCommenaire=:idCommenaire";
+            $query = "UPDATE $tableName SET Contenu=:contenu WHERE idCommentaire=:idCommentaire";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':contenu', $contenu);
             $stmt->bindParam(':idCommentaire', $idCommentaire);

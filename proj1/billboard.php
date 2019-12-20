@@ -12,16 +12,10 @@
     }
 
     $content = array();
-
-    if(isset($_GET["id"]))
-    {
-        $module = "displaythreadview.php";
-        array_push($content, $module);
-    }
-    else{
+    
         $module = "billboardview.php";
         array_push($content, $module);
-    }
+    
     require_once __DIR__ . "/HTML/masterpage.php";
 
 ?>

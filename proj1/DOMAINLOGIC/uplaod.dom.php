@@ -2,6 +2,8 @@
 
 include __DIR__ . "/../CLASSES/IMAGES/Images.php";
 
+$_FILES['Image'] =  $_FILES['Fichier'];
+
 if(isset($_FILES['Image'])){
  
     $Description = $_POST['Description'];
@@ -9,19 +11,22 @@ if(isset($_FILES['Image'])){
 
     //obtenir l'extention du fichier uploader
     $media_file_type = pathinfo($_FILES['Image']['name'],PATHINFO_EXTENSION);
-  
+    echo $media_file_type;
     // Valid file extensions
     $img_extensions_arr = array("jpg","jpeg","png","gif");
     $vid_extensions_arr = array("webm", "avi", "wmv", "rm", "rmvb", "mp4", "mpeg");
 
-    if(in_array($media_file_type, $img_extensions_arr)){;
+    if(in_array(strtolower ($media_file_type), $img_extensions_arr)){;
         echo "VALID";
     }
-    else if(in_array($media_file_type, $vid_extensions_arr)){
+    else if(in_array(strtolower ($media_file_type), $vid_extensions_arr)){
+        
+        
         echo "INVALID FILE TYPE";
         die();
     }
     else{
+       
         echo "INVALID FILE TYPE";
         die();
     }
@@ -38,10 +43,11 @@ if(isset($_FILES['Image'])){
     move_uploaded_file($_FILES['Image']['tmp_name'], "../" . $URL);
 
     //create entry in database
-    Images::addImage($url, $_GET["idAlbum"] ,$description);
+    $Images = new Images();
+    $Images  ->addImage($URL, $_POST["idAlbum"] ,$Description);
 
     //redirection
-    header("Location: ../displayImage.php");
+    header('Location: ' . $_SERVER['HTTP_REFERER']); // Bad Pratice : Peut etre hijacker , apparament
     die();
 }
 

@@ -20,22 +20,39 @@
     <body>
         <?php
 
-            if(isset($_GET["idAlbum"]))
-            $image_arr = Images::listImagesByIdAlbum($_GET["idAlbum"]);
+            if(!isset($_GET["Type"]))
+            {
+                header("Location: error.php?ErrorMSG=Unknown%20Type!");
+                die();
+            }
+            
 
-            if(isset($_GET["idImage"]))
+
+
+            if($_GET["Type"] == "album")
+            $image_arr = Images::listImagesByIdAlbum($_GET["idType"]);
+            else if($_GET["Type"] == "image")
             {
                 $image_arr=array();
                 $image = new Images();
-                $image->loadImageById($_GET["idImage"]);
+                $image->loadImageById($_GET["idType"]);
                 array_push($image_arr,$image);
 
             }
-
+           
+            if(count($image_arr) != 0)
             foreach($image_arr as $image){
 
                 $image->displayImage();
+                echo"<form></form>";
 
+            }
+            
+            else
+            {
+                echo "<div class='Container'>
+                        <h6>Empty as the void</h6>
+                       </div> ";
             }
         ?>
     </body>

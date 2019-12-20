@@ -9,13 +9,13 @@
         die();
     }
 
-    if(!isset($_GET["idCommentaire"])){
+    if(!isset($_POST["idCommentaire"])){
         header("Location: ../error.php?ErrorMSG=Bad%20Requests!");
         die();
     }
 
     $commentaire = new Commentaires();
-    $commentaire->loadCommentaire($_GET["idCommentaire"]);
+    $commentaire->loadCommentaire($_POST["idCommentaire"]);
 
     if(!$commentaire->getProprietaire() == $_SESSION["userID"]){
         header("Location: ../error.php?ErrorMSG=Bad%20Requests!");
@@ -24,6 +24,6 @@
     
     $commentaire->delete();
 
-    header("Location: ../billboard.php");
+    header('Location: ' . $_SERVER['HTTP_REFERER']); // Bad Pratice : Peut etre hijacker , apparament
     die();
 ?>

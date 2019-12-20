@@ -1,12 +1,17 @@
 <?php
     
-    include __DIR__ . "/CLASSES/Commentaires/Commentaires.php";
+    include_once "./CLASSES/Commentaires/Commentaires.php";
     
-    $Boi = Commentaires::createCommentaireList($_GET["idImage"],$_GET["Type"]);
+    $Commentaires = Commentaires::createCommentaireList($_GET["idType"],$_GET["Type"]);
 
-    foreach($Boi as $Na)
-        $Na->display();    
 
+
+    
+    foreach($Commentaires as $Commentaire)
+    {
+        
+        $Commentaire->display();    
+    }
 
 
 

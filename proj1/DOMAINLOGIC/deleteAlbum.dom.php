@@ -2,6 +2,7 @@
     include __DIR__ . "/../CLASSES/ALBUMS/Album.php";
     include __DIR__ . "/../UTILS/sessionhandler.php";
     include __DIR__ . "/../CLASSES/IMAGES/Images.php";
+    
 
     session_start();
 
@@ -24,8 +25,9 @@
     }
     
     Images::deleteImageByIdAlbum($_GET["idAlbum"]);
+    
     $album->delete();
 
-    header("Location: ../billboard.php");
+    header("Location: ../myAlbum.php");
     die();
 ?>

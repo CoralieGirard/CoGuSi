@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__ . "/ImagesTDG.php";
+include_once __DIR__ ."/../Commentaires/Commentaires.php";
 
 date_default_timezone_set("America/New_York");
 class Images{
@@ -215,7 +216,25 @@ class Images{
         public static function deleteImageByIdAlbum($idAlbum)
         {
             $TDG = ImagesTDG::getInstance();
+
+            $ListImage = self::listImagesByIdAlbum($idAlbum);
+
+            foreach($ListImage as $image)
+            {
+                Commentaires::deleteCommentairesByIDAndType($image->getIdImage(),"image");
+            }
+
             $res = $TDG->deleteImageByAlbum($idAlbum);
+            $TDG = null;
+            return $res;
+        }
+
+        public static function deleteByID($idImage)
+        {
+            $TDG = ImagesTDG::getInstance();
+
+            Commentaires::deleteCommentairesByIDAndType($idImage,"image");
+            $res = $TDG->deleteImage($idImage);
             $TDG = null;
             return $res;
         }

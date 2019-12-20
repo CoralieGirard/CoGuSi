@@ -23,12 +23,19 @@
 
 
 
-    if(!$commentaire->addCommentaire($Type, $idType, $Contenu, $Proprietaire)){
-      header("Location: ../error.php?ErrorMSG=Mission%20Failed%20".$idType."%20".$Type);
+    if(!$commentaire->addCommentaire($idType, $Type, $Contenu, $Proprietaire)){
+      //header("Location: ../error.php?ErrorMSG=Mission%20Failed%20".$idType."%20".$Type);
       die();
     }
 
-    header("Location: ../ImageCommentaire.php?idImage=".$Type."&Type=".$idType);
+    if($Type == "album")
+    {
+    $titre =  $_POST["Titre"];
+    header("Location: ../displayalbum.php?idType=$idType&Type=$Type&Titre=$titre");
+    }
+    else if($Type == "image")
+    header("Location: ../ImageCommentaire.php?idType=".$idType."&Type=".$Type);
+
 
     die();
 

@@ -8,6 +8,7 @@
 
     include_once __DIR__."/TDGAlbum.php";
     include_once __DIR__."../../USER/user.php";
+    include_once __DIR__."../../Commentaires/Commentaires.php";
 
 
     date_default_timezone_set("America/New_York");
@@ -152,15 +153,15 @@
             $dateCreation = date("Y-m-d H:i:s");
             $res = $TDG->addAlbum($titre, $description, $dateCreation);
             $TDG = null;
-            if(!$res)
-            {
-                return $res;
-            }
+            
             return $res;
         }
         
         public function delete(){
             $TDG = TDGAlbum::getInstance();
+
+            Commentaires::deleteCommentairesByIDAndType($this->id,"album");
+
             $res = $TDG->deleteAlbum($this->id);
             $TDG = null;
             return $res;
@@ -174,7 +175,7 @@
             $date = $this->dateCreation;
             $proprio = User::getById($this->proprietaire);
             echo "<div class='card bg-dark mb-4'>";
-            echo "<div class='card-header text-left'><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a> By " . $proprio;
+            echo "<div class='card-header text-left'><a href='displayalbum.php?idType=$id&Titre=$titre&Type=album'><h5>$titre</h5></a> By " . $proprio;
             echo "<br><div class='my-3 p-3 bg-white rounded shadow-sm'><h5>Description</h5><br>$description</div>";
             echo "</div>";
             echo $date;
@@ -188,7 +189,7 @@
             $description = $this->description;
             $date = $this->dateCreation;
             echo "<div class='card bg-dark mb-4'>";
-            echo "<div class='card-header text-left '><div class='d-flex justify-content-between align-items-center w-100'><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
+            echo "<div class='card-header text-left '><div class='d-flex justify-content-between align-items-center w-100'><a href='displayalbum.php?idType=$id&Titre=$titre&Type=album'><h5>$titre</h5></a>";
             echo "<form method = 'post' action = 'DOMAINLOGIC/deleteAlbum.dom.php?idAlbum=$id'>";
             echo "<button class='btn btn-danger mb-2' type='submit'>Delete album</button></div>";
             echo "<br><div class='my-3 p-3 bg-white rounded shadow-sm'><h5>Description</h5><br>$description</div>";
@@ -205,7 +206,7 @@
             $description = $this->description;
             $date = $this->dateCreation;
             echo "<div class='card bg-dark mb-4'>";
-            echo "<div class='card-header text-left'><a href='displayalbum.php?idAlbum=$id&albumTitre=$titre'><h5>$titre</h5></a>";
+            echo "<div class='card-header text-left'><a href='displayalbum.php?idType=$id&Titre=$titre&Type=album'><h5>$titre</h5></a>";
             echo "<br><div class='my-3 p-3 bg-white rounded shadow-sm'><h5>Description</h5><br>$description</div>";
             echo "</div>";
             echo $date;

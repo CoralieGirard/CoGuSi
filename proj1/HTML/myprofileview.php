@@ -60,7 +60,7 @@
 
           <form method = "post" action = "./DOMAINLOGIC/updateProfileImage.php" enctype="multipart/form-data">
           <div class="form-group">
-                  <label for="Fichier">new password validation:</label>
+                  <label for="Fichier">New Profile PIC:</label>
                   <input type="file" class="form-control" name="Fichier" id="Fichier" required>
                   <br>
               </div>

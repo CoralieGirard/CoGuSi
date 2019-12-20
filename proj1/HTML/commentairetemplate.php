@@ -8,6 +8,8 @@
 
   <?php 
 
+  
+
   if(isset($_SESSION["userID"]) && $Proprietaire == $_SESSION["userID"]){
 
     echo "<div class='card-footer text-left'>
@@ -28,7 +30,7 @@
       </div>
 
     </form>
-
+   
 
     <form method = 'post' action = 'DOMAINLOGIC/deleteCommentaire.dom.php'>
 

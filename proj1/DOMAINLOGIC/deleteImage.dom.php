@@ -4,25 +4,17 @@
 
     session_start();
 
-    if(!validate_session()){
+    if(!validateSession()){
         header("Location: ../error.php?ErrorMSG=Not%20logged%20in!");
         die();
     }
 
-    if(!isset($_GET["idImage"])){
+    if(!isset($_POST["idImage"])){
         header("Location: ../error.php?ErrorMSG=Bad%20Requests!");
         die();
     }
 
-    $image = new Images();
-    $image->loadImageById($_GET["idImage"]);
-
-    if(!$image->getProprietaire() == $_SESSION["userID"]){
-        header("Location: ../error.php?ErrorMSG=Bad%20Requests!");
-        die();
-    }
-    
-    $image->deleteImage();
+    Images::deleteByID($_POST["idImage"]);
 
     header("Location: ../billboard.php");
     die();
